@@ -1,0 +1,77 @@
+{
+	"name": "ts-wasms",
+	"version": "1.0.3",
+	"description": "Pre-built WebAssembly binaries for tree-sitter grammars.",
+	"scripts": {
+		"build": "node build.js"
+	},
+	"keywords": [
+		"tree-sitter",
+		"wasm"
+	],
+	"author": "Crysthamus",
+	"license": "MIT",
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "^11.1.2",
+			"onFail": "download"
+		}
+	},
+	"type": "module",
+	"files": [
+		"out"
+	],
+	"devDependencies": {
+		"@6cdh/tree-sitter-racket": "0.24.7-1",
+		"@6cdh/tree-sitter-scheme": "0.24.7-1",
+		"@eagleoutice/tree-sitter-r": "^1.1.2",
+		"@elm-tooling/tree-sitter-elm": "^5.9.0",
+		"@tree-sitter-grammars/tree-sitter-lua": "^0.4.1",
+		"@tree-sitter-grammars/tree-sitter-markdown": "^0.3.2",
+		"@tree-sitter-grammars/tree-sitter-toml": "^0.7.0",
+		"@tree-sitter-grammars/tree-sitter-xml": "^0.7.0",
+		"@tree-sitter-grammars/tree-sitter-zig": "^1.1.2",
+		"p-map": "^7.0.4",
+		"tree-sitter-bash": "^0.25.1",
+		"tree-sitter-c": "^0.24.1",
+		"tree-sitter-c-sharp": "^0.23.5",
+		"tree-sitter-cli": "^0.26.8",
+		"tree-sitter-clojure": "git+https://github.com/sogaiu/tree-sitter-clojure.git",
+		"tree-sitter-clojurescript": "git+https://github.com/sogaiu/tree-sitter-clojure.git",
+		"tree-sitter-commonlisp": "git+https://github.com/tree-sitter-grammars/tree-sitter-commonlisp.git",
+		"tree-sitter-cpp": "^0.23.4",
+		"tree-sitter-css": "^0.25.0",
+		"tree-sitter-dart": "^1.0.0",
+		"tree-sitter-elisp": "^1.6.1",
+		"tree-sitter-elixir": "^0.3.5",
+		"tree-sitter-embedded-template": "^0.25.0",
+		"tree-sitter-erlang": "git+https://github.com/WhatsApp/tree-sitter-erlang.git",
+		"tree-sitter-go": "^0.25.0",
+		"tree-sitter-graphql": "git+https://github.com/joowani/tree-sitter-graphql.git",
+		"tree-sitter-haskell": "^0.23.1",
+		"tree-sitter-html": "^0.23.2",
+		"tree-sitter-java": "^0.23.5",
+		"tree-sitter-javascript": "^0.25.0",
+		"tree-sitter-json": "^0.24.8",
+		"tree-sitter-julia": "git+https://github.com/tree-sitter/tree-sitter-julia.git",
+		"tree-sitter-kotlin": "^0.3.8",
+		"tree-sitter-objc": "^3.0.2",
+		"tree-sitter-ocaml": "^0.24.2",
+		"tree-sitter-perl": "git+https://github.com/tree-sitter-perl/tree-sitter-perl.git#release",
+		"tree-sitter-php": "^0.24.2",
+		"tree-sitter-prisma": "git+https://github.com/victorhqc/tree-sitter-prisma.git",
+		"tree-sitter-python": "^0.25.0",
+		"tree-sitter-query": "git+https://github.com/tree-sitter-grammars/tree-sitter-query.git",
+		"tree-sitter-regex": "^0.25.0",
+		"tree-sitter-ruby": "^0.23.1",
+		"tree-sitter-rust": "^0.24.0",
+		"tree-sitter-scala": "^0.24.0",
+		"tree-sitter-sql": "^0.1.0",
+		"tree-sitter-swift": "^0.7.1",
+		"tree-sitter-typescript": "^0.23.2",
+		"tree-sitter-vimdoc": "git+https://github.com/neovim/tree-sitter-vimdoc.git",
+		"tree-sitter-vue": "^0.2.1",
+		"tree-sitter-yaml": "git+https://github.com/ikatyang/tree-sitter-yaml.git"
+	}
+}
