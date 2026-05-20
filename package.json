@@ -1,6 +1,6 @@
 {
 	"name": "ts-wasms",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Pre-built WebAssembly binaries for tree-sitter grammars.",
 	"scripts": {
 		"build": "node build.js"
@@ -27,6 +27,7 @@
 		"@6cdh/tree-sitter-scheme": "0.24.7-1",
 		"@eagleoutice/tree-sitter-r": "^1.1.2",
 		"@elm-tooling/tree-sitter-elm": "^5.9.0",
+		"@tree-sitter-grammars/tree-sitter-hcl": "^1.2.0",
 		"@tree-sitter-grammars/tree-sitter-lua": "^0.4.1",
 		"@tree-sitter-grammars/tree-sitter-markdown": "^0.3.2",
 		"@tree-sitter-grammars/tree-sitter-toml": "^0.7.0",
@@ -56,6 +57,7 @@
 		"tree-sitter-json": "^0.24.8",
 		"tree-sitter-julia": "git+https://github.com/tree-sitter/tree-sitter-julia.git",
 		"tree-sitter-kotlin": "^0.3.8",
+		"tree-sitter-nix": "git+https://github.com/nix-community/tree-sitter-nix.git",
 		"tree-sitter-objc": "^3.0.2",
 		"tree-sitter-ocaml": "^0.24.2",
 		"tree-sitter-perl": "git+https://github.com/tree-sitter-perl/tree-sitter-perl.git#release",
@@ -67,6 +69,7 @@
 		"tree-sitter-ruby": "^0.23.1",
 		"tree-sitter-rust": "^0.24.0",
 		"tree-sitter-scala": "^0.24.0",
+		"tree-sitter-scss": "^1.0.0",
 		"tree-sitter-sql": "^0.1.0",
 		"tree-sitter-swift": "^0.7.1",
 		"tree-sitter-typescript": "^0.23.2",

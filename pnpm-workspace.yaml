@@ -3,6 +3,7 @@ allowBuilds:
   '@6cdh/tree-sitter-scheme': false
   '@eagleoutice/tree-sitter-r': false
   '@elm-tooling/tree-sitter-elm': false
+  '@tree-sitter-grammars/tree-sitter-hcl': false
   '@tree-sitter-grammars/tree-sitter-lua': false
   '@tree-sitter-grammars/tree-sitter-markdown': false
   '@tree-sitter-grammars/tree-sitter-toml': false
@@ -29,6 +30,7 @@ allowBuilds:
   tree-sitter-json: false
   tree-sitter-julia: false
   tree-sitter-kotlin: false
+  tree-sitter-nix: false
   tree-sitter-objc: false
   tree-sitter-ocaml: false
   tree-sitter-perl: false
@@ -40,6 +42,7 @@ allowBuilds:
   tree-sitter-ruby: false
   tree-sitter-rust: false
   tree-sitter-scala: false
+  tree-sitter-scss: false
   tree-sitter-sql: false
   tree-sitter-swift: false
   tree-sitter-typescript: false

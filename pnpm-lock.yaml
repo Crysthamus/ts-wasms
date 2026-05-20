@@ -219,6 +219,9 @@ importers:
       '@elm-tooling/tree-sitter-elm':
         specifier: ^5.9.0
         version: 5.9.0
+      '@tree-sitter-grammars/tree-sitter-hcl':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tree-sitter-grammars/tree-sitter-lua':
         specifier: ^0.4.1
         version: 0.4.1
@@ -306,6 +309,9 @@ importers:
       tree-sitter-kotlin:
         specifier: ^0.3.8
         version: 0.3.8
+      tree-sitter-nix:
+        specifier: git+https://github.com/nix-community/tree-sitter-nix.git
+        version: https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017
       tree-sitter-objc:
         specifier: ^3.0.2
         version: 3.0.2
@@ -339,6 +345,9 @@ importers:
       tree-sitter-scala:
         specifier: ^0.24.0
         version: 0.24.0
+      tree-sitter-scss:
+        specifier: ^1.0.0
+        version: 1.0.0
       tree-sitter-sql:
         specifier: ^0.1.0
         version: 0.1.0
@@ -389,6 +398,14 @@ packages:
 
   '@elm-tooling/tree-sitter-elm@5.9.0':
     resolution: {integrity: sha512-9iLNjGv/FYXHAi+YYu1GnakKsQkPJ1eXsl2DWuwAmcTY8kH/aFqzylryMcwEXT2sEbYNbjNrfjC5HXql0PMkKQ==}
+    peerDependencies:
+      tree-sitter: ^0.25.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  '@tree-sitter-grammars/tree-sitter-hcl@1.2.0':
+    resolution: {integrity: sha512-2bVnOojkkdMLevp0G4v3ksbNoOQFc/Pt9GAdWX4i3aykVyI+CkktE1hsF/XAeUQFjwgGrVZnEyeCll5oD7Ibfg==}
     peerDependencies:
       tree-sitter: ^0.25.0
     peerDependenciesMeta:
@@ -527,6 +544,9 @@ packages:
       tree-sitter:
         optional: true
 
+  tree-sitter-css@0.20.0:
+    resolution: {integrity: sha512-ammbs1bnIwHXPVtPGNc3T16rhPFRiK97pBgO4svlYWyt+fSEgGQzK3MSWB5vf3k3pSDWkpEFOTUxPPMR6k7N7Q==}
+
   tree-sitter-css@0.25.0:
     resolution: {integrity: sha512-FRc9R8ePrwJiUhZsuZ/wcFQ3K8Z+9yCgDrrUjuYswGWlN89UvcB9vslTUGZElQWGwhS8sUw3/r2n4lpb2sxT4Q==}
     peerDependencies:
@@ -653,6 +673,10 @@ packages:
       tree_sitter:
         optional: true
 
+  tree-sitter-nix@https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017:
+    resolution: {gitHosted: true, integrity: sha512-VVE1god+tTxmTd4ewW7FVJy6k1vbFCfQL3UMG6ZUe7Y8df7Et4g4xIGG8F3XvAk3RPRqX9ZbOrKzH9yb9F9dpg==, tarball: https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017}
+    version: 0.3.0
+
   tree-sitter-objc@3.0.2:
     resolution: {integrity: sha512-Hs0ohmx1u5M+0K7efoW+dv/corhBsfjftfIYLtp7dSGeJ+Zj4c33tDIboBYLs6qijRlz6wtHFxa0YX+FibLulA==}
     peerDependencies:
@@ -745,6 +769,14 @@ packages:
       tree-sitter:
         optional: true
 
+  tree-sitter-scss@1.0.0:
+    resolution: {integrity: sha512-CYHEkSG4RTGHfwwQSXwsnagRUNr2Gh2jzrvNUXz95OfSzOdUAtPx4aM1zOGSprAzOPnwlBQfbYs0vVsklf3WWA==}
+    peerDependencies:
+      tree-sitter: ^0.21.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
   tree-sitter-sql@0.1.0:
     resolution: {integrity: sha512-8RDVqEGgtVj8FRJ8WkVEzNkfSflkABHJte4KoC1Dl1DucUL7qQzvnAVKVjVW+nGFD+lOgcdl0PkN/oy0/cIbww==}
 
@@ -804,6 +836,11 @@ snapshots:
       node-gyp-build: 4.8.4
 
   '@elm-tooling/tree-sitter-elm@5.9.0':
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  '@tree-sitter-grammars/tree-sitter-hcl@1.2.0':
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
@@ -883,6 +920,10 @@ snapshots:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
       tree-sitter-c: 0.23.6
+
+  tree-sitter-css@0.20.0:
+    dependencies:
+      nan: 2.27.0
 
   tree-sitter-css@0.25.0:
     dependencies:
@@ -965,6 +1006,10 @@ snapshots:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
+  tree-sitter-nix@https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017:
+    dependencies:
+      nan: 2.27.0
+
   tree-sitter-objc@3.0.2:
     dependencies:
       node-addon-api: 8.7.0
@@ -1020,6 +1065,12 @@ snapshots:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
+
+  tree-sitter-scss@1.0.0:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+      tree-sitter-css: 0.20.0
 
   tree-sitter-sql@0.1.0:
     dependencies:
