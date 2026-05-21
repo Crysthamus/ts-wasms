@@ -2,7 +2,6 @@ name: Build and Publish WASMs
 
 on:
   workflow_dispatch:
-
   release:
     types: [published]
 
@@ -42,8 +41,15 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Install WASI SDK
+        run: |
+          mkdir -p ${{ github.workspace }}/opt/wasi-sdk
+          curl -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-29/wasi-sdk-29.0-x86_64-linux.tar.gz | tar -xzf - -C ${{ github.workspace }}/opt/wasi-sdk --strip-components=1
+
       - name: Build WASMs
         run: pnpm run build
+        env:
+          WASI_SDK_PATH: ${{ github.workspace }}/opt/wasi-sdk
 
       - name: Publish to NPM
         run: pnpm publish --no-git-checks

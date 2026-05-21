@@ -1,6 +1,6 @@
 {
 	"name": "ts-wasms",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Pre-built WebAssembly binaries for tree-sitter grammars.",
 	"scripts": {
 		"build": "node build.js"

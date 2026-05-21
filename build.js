@@ -20,6 +20,12 @@ const IGNORED_DIRS = new Set([
 	"docs",
 ]);
 
+const LANG_NAME_MAP = {
+	"hcl-terraform": "terraform",
+	"xml-dtd": "dtd",
+	"typescript-tsx": "tsx",
+};
+
 /**
  * Recursively searches a directory for folders containing 'grammar.js'
  * OR pre-generated tree-sitter C files marked by 'src/grammar.json'.
@@ -161,15 +167,20 @@ async function main() {
 					langName = `${baseCleanName}-${cleanWasmName}`;
 				}
 
+				if (LANG_NAME_MAP[langName]) {
+					langName = LANG_NAME_MAP[langName];
+				}
+
 				const langOutDir = path.join(OUT_DIR, langName);
 
 				try {
 					await fs.mkdir(langOutDir, { recursive: true });
+
 					await fs.copyFile(
 						path.join(depPath, wasmFile),
-						path.join(langOutDir, wasmFile),
+						path.join(langOutDir, `tree-sitter-${langName}.wasm`),
 					);
-					await copyScmFiles(depPath, langOutDir, depPath); // Pass depPath as grammar dir
+					await copyScmFiles(depPath, langOutDir, depPath);
 
 					console.log(
 						`[SUCCESS] Copied prebuilt WASM and queries for ${langName}`,
@@ -215,6 +226,10 @@ async function main() {
 				}
 			}
 
+			if (LANG_NAME_MAP[langName]) {
+				langName = LANG_NAME_MAP[langName];
+			}
+
 			const langOutDir = path.join(OUT_DIR, langName);
 
 			try {
@@ -226,6 +241,15 @@ async function main() {
 				await execAsync(`pnpm exec tree-sitter build --wasm "${grammarDir}"`, {
 					cwd: langOutDir,
 				});
+
+				const outFiles = await fs.readdir(langOutDir);
+				const generatedWasm = outFiles.find((f) => f.endsWith(".wasm"));
+				if (generatedWasm && generatedWasm !== `tree-sitter-${langName}.wasm`) {
+					await fs.rename(
+						path.join(langOutDir, generatedWasm),
+						path.join(langOutDir, `tree-sitter-${langName}.wasm`),
+					);
+				}
 
 				await copyScmFiles(grammarDir, langOutDir, depPath);
 
