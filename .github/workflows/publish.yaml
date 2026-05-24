@@ -7,19 +7,43 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
       id-token: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Generate Changelog from Conventional Commits
+        if: github.event_name == 'release'
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          branch: main
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          file_pattern: CHANGELOG.md
+
+      - name: Update GitHub Release Description
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
+          append_body: true
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
@@ -33,15 +57,19 @@ jobs:
           cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Setup Emscripten
-        uses: mymindstorm/setup-emsdk@v14
+      - name: Setup and cache Emscripten
+        uses: mymindstorm/setup-emsdk@v15
         with:
-          version: 3.1.55
+          version: 5.0.1
+          actions-cache-folder: 'emsdk-cache'
 
-      - name: Install Dependencies
-        run: pnpm install
+      - name: Cache WASI SDK
+        id: cache-wasi
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/tree-sitter/wasi-sdk
+          key: wasi-sdk-29-${{ runner.os }}
 
-        
       - name: Install WASI SDK
         run: |
           WASI_VERSION=29
@@ -50,27 +78,31 @@ jobs:
 
           mkdir -p "$CACHE_DIR"
 
-          if [ ! -d "$SDK_DIR" ]; then
-            curl -LO \
-              "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_VERSION}/wasi-sdk-${WASI_VERSION}.0-x86_64-linux.tar.gz"
-
+          if [ "${{ steps.cache-wasi.outputs.cache-hit }}" != 'true' ]; then
+            echo "Cache miss: Downloading WASI SDK..."
+            curl -LO "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_VERSION}/wasi-sdk-${WASI_VERSION}.0-x86_64-linux.tar.gz"
             mkdir -p "$SDK_DIR"
-
-            tar -xzf \
-              "wasi-sdk-${WASI_VERSION}.0-x86_64-linux.tar.gz" \
-              --strip-components=1 \
-              -C "$SDK_DIR"
+            tar -xzf "wasi-sdk-${WASI_VERSION}.0-x86_64-linux.tar.gz" --strip-components=1 -C "$SDK_DIR"
+            rm "wasi-sdk-${WASI_VERSION}.0-x86_64-linux.tar.gz"
+          else
+            echo "Cache hit: Using restored WASI SDK structure."
           fi
 
           echo "$SDK_DIR/bin" >> $GITHUB_PATH
           echo "WASI_SDK_PATH=$SDK_DIR" >> $GITHUB_ENV
 
+      - name: Install Dependencies
+        run: pnpm install
+
       - name: Build WASMs
         run: pnpm run build
-        env:
-          WASI_SDK_PATH: ${{ github.workspace }}/opt/wasi-sdk
 
       - name: Publish to NPM
-        run: pnpm publish --no-git-checks
+        run: |
+          if pnpm view $(node -p "require('./package.json').name")@$(node -p "require('./package.json').version") > /dev/null 2>&1; then
+            echo "Version already published to NPM. Skipping deployment."
+          else
+            pnpm publish --no-git-checks --provenance
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

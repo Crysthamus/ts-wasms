@@ -26,6 +26,34 @@ const LANG_NAME_MAP = {
 	"typescript-tsx": "tsx",
 };
 
+const SCM_FILES = [
+	"highlights.scm",
+	"injections.scm",
+	"locals.scm",
+	"tags.scm",
+	"folds.scm",
+	"indents.scm",
+];
+
+const log = {
+	info: (msg) => console.log(`[INFO] ${msg}`),
+	debug: (msg) => console.log(`[DEBUG] ${msg}`),
+	warn: (msg) => console.warn(`[WARN] ${msg}`),
+	error: (msg) => console.error(`[ERROR] ${msg}`),
+};
+
+/**
+ * Derives the canonical language name based on the base package name and target name.
+ */
+function getLanguageName(baseName, targetName) {
+	const rawName =
+		targetName.startsWith(baseName) || targetName === baseName
+			? targetName
+			: `${baseName}-${targetName}`;
+
+	return LANG_NAME_MAP[rawName] || rawName;
+}
+
 /**
  * Recursively searches a directory for folders containing 'grammar.js'
  * OR pre-generated tree-sitter C files marked by 'src/grammar.json'.
@@ -38,11 +66,8 @@ async function findGrammarDirs(dir) {
 		let hasSrcDir = false;
 
 		for (const entry of entries) {
-			if (entry.isFile() && entry.name === "grammar.js") {
-				hasGrammarJs = true;
-			} else if (entry.isDirectory() && entry.name === "src") {
-				hasSrcDir = true;
-			}
+			if (entry.isFile() && entry.name === "grammar.js") hasGrammarJs = true;
+			else if (entry.isDirectory() && entry.name === "src") hasSrcDir = true;
 		}
 
 		let hasGrammarJson = false;
@@ -72,8 +97,7 @@ async function findGrammarDirs(dir) {
 }
 
 /**
- * Copies .scm query files from the grammar directory (and its 'queries' subfolder)
- * as well as the root dependency directory to handle shared queries.
+ * Copies .scm query files from the grammar directory and the root dependency directory.
  */
 async function copyScmFiles(grammarDir, targetDir, depPath) {
 	const dirsToCheck = [path.join(grammarDir, "queries"), grammarDir];
@@ -101,15 +125,240 @@ async function copyScmFiles(grammarDir, targetDir, depPath) {
 	}
 }
 
+/**
+ * Concurrently fetches missing .scm files from nvim-treesitter.
+ */
+async function fetchMissingQueries(langName, targetDir) {
+	await pMap(
+		SCM_FILES,
+		async (scmFile) => {
+			const destPath = path.join(targetDir, scmFile);
+
+			try {
+				await fs.access(destPath);
+				return;
+			} catch {}
+
+			const url = `https://raw.githubusercontent.com/nvim-treesitter/nvim-treesitter/main/runtime/queries/${langName}/${scmFile}`;
+
+			try {
+				const response = await fetch(url);
+				if (response.ok) {
+					const text = await response.text();
+					await fs.writeFile(destPath, text);
+					log.debug(
+						`Downloaded ${scmFile} for ${langName} from nvim-treesitter`,
+					);
+				} else if (response.status !== 404) {
+					log.warn(
+						`Failed to download ${scmFile} for ${langName}: HTTP ${response.status}`,
+					);
+				}
+			} catch (error) {
+				log.warn(
+					`Network error fetching ${scmFile} for ${langName}: ${error.message}`,
+				);
+			}
+		},
+		{ concurrency: 3 },
+	);
+}
+
+/**
+ * Generates the index.d.ts file based on successfully processed languages.
+ */
+async function generateDeclarationFile(languages) {
+	const sortedLangs = Array.from(languages).sort();
+	const langUnion =
+		sortedLangs.length > 0
+			? sortedLangs.map((l) => `    | "${l}"`).join("\n")
+			: `    | string`;
+
+	const content = `/** Standard Tree-sitter query categories */
+export type TreeSitterQuery =
+    | "highlights"
+    | "injections"
+    | "locals"
+    | "tags"
+    | "folds"
+    | "indents";
+
+/** Supported language identifiers compiled during build step */
+export type SupportedLanguage =
+${langUnion};
+
+/** Resolves the absolute path to a specific language's WASM file. */
+export declare function getWasmPath(lang: SupportedLanguage): string;
+
+/** Resolves the absolute path to a specific language's query file. */
+export declare function getQueryPath(
+    lang: SupportedLanguage,
+    query: TreeSitterQuery,
+): string;
+`;
+
+	await fs.writeFile(path.resolve("index.d.ts"), content, "utf8");
+	log.info(
+		`Generated index.d.ts with ${sortedLangs.length} type-safe languages.`,
+	);
+}
+
+/**
+ * Processes a package relying on prebuilt WASM files.
+ */
+async function processPrebuiltWasm(
+	wasmFiles,
+	depPath,
+	baseCleanName,
+	successfulLanguages,
+) {
+	for (const wasmFile of wasmFiles) {
+		const cleanWasmName = wasmFile
+			.replace(/\.wasm$/, "")
+			.replace(/^tree-sitter-/, "")
+			.replace(/_/g, "-");
+
+		const langName = getLanguageName(baseCleanName, cleanWasmName);
+		const langOutDir = path.join(OUT_DIR, langName);
+
+		try {
+			await fs.mkdir(langOutDir, { recursive: true });
+			await fs.copyFile(
+				path.join(depPath, wasmFile),
+				path.join(langOutDir, `tree-sitter-${langName}.wasm`),
+			);
+
+			await copyScmFiles(depPath, langOutDir, depPath);
+			await fetchMissingQueries(langName, langOutDir);
+
+			successfulLanguages.add(langName);
+			log.info(`Copied prebuilt WASM and queries for ${langName}`);
+		} catch (error) {
+			log.error(
+				`Failed to process prebuilt WASM ${wasmFile}: ${error.message}`,
+			);
+		}
+	}
+}
+
+/**
+ * Compiles a Tree-sitter grammar from source into WASM.
+ */
+async function processSourceGrammar(
+	grammarDirs,
+	depPath,
+	baseCleanName,
+	successfulLanguages,
+) {
+	for (const grammarDir of grammarDirs) {
+		const relativeName = path.relative(
+			path.resolve("node_modules"),
+			grammarDir,
+		);
+		const cleanFolderName =
+			grammarDir === depPath
+				? baseCleanName
+				: path.basename(grammarDir).replace(/^tree-sitter-/, "");
+
+		const langName = getLanguageName(baseCleanName, cleanFolderName);
+		const langOutDir = path.join(OUT_DIR, langName);
+
+		try {
+			await fs.mkdir(langOutDir, { recursive: true });
+			log.debug(`Building WASM for ${relativeName} into out/${langName}...`);
+
+			await execAsync(`pnpm exec tree-sitter build --wasm "${grammarDir}"`, {
+				cwd: langOutDir,
+			});
+
+			const outFiles = await fs.readdir(langOutDir);
+			const generatedWasm = outFiles.find((f) => f.endsWith(".wasm"));
+			if (generatedWasm && generatedWasm !== `tree-sitter-${langName}.wasm`) {
+				await fs.rename(
+					path.join(langOutDir, generatedWasm),
+					path.join(langOutDir, `tree-sitter-${langName}.wasm`),
+				);
+			}
+
+			await copyScmFiles(grammarDir, langOutDir, depPath);
+			await fetchMissingQueries(langName, langOutDir);
+
+			successfulLanguages.add(langName);
+			log.info(`Compiled and copied queries for ${langName}`);
+		} catch (error) {
+			log.error(
+				`Failed to process ${relativeName}: ${error.message.split("\n")[0]}`,
+			);
+		}
+	}
+}
+
+/**
+ * Routes a dependency to either prebuilt copying or source compilation.
+ */
+async function processDependency(dep, successfulLanguages) {
+	const depPath = path.resolve("node_modules", dep);
+
+	try {
+		await fs.access(depPath);
+	} catch {
+		log.warn(`Directory missing for ${dep}. Did you run install?`);
+		return;
+	}
+
+	const baseCleanName = dep
+		.replace(/^@[^/]+\//, "")
+		.replace(/^tree-sitter-/, "");
+	const prebuiltWasms = [];
+
+	try {
+		const entries = await fs.readdir(depPath, { withFileTypes: true });
+		for (const entry of entries) {
+			if (
+				entry.isFile() &&
+				entry.name.endsWith(".wasm") &&
+				entry.name.startsWith("tree-sitter-")
+			) {
+				prebuiltWasms.push(entry.name);
+			}
+		}
+	} catch (e) {}
+
+	if (prebuiltWasms.length > 0) {
+		log.debug(`Found prebuilt WASMs for ${dep}. Skipping build.`);
+		await processPrebuiltWasm(
+			prebuiltWasms,
+			depPath,
+			baseCleanName,
+			successfulLanguages,
+		);
+	} else {
+		const grammarDirs = await findGrammarDirs(depPath);
+		if (grammarDirs.length === 0) {
+			log.warn(`No grammar.js or src/grammar.json found for ${dep}. Skipping.`);
+			return;
+		}
+		await processSourceGrammar(
+			grammarDirs,
+			depPath,
+			baseCleanName,
+			successfulLanguages,
+		);
+	}
+}
+
+/**
+ * Main application entry point.
+ */
 async function main() {
 	await fs.mkdir(OUT_DIR, { recursive: true });
-
 	let pkg;
+
 	try {
 		const pkgRaw = await fs.readFile("package.json", "utf8");
 		pkg = JSON.parse(pkgRaw);
 	} catch (error) {
-		console.error("[FATAL] Could not read or parse package.json.");
+		log.error("Could not read or parse package.json.");
 		process.exit(1);
 	}
 
@@ -119,151 +368,19 @@ async function main() {
 			d !== "tree-sitter-cli",
 	);
 
-	console.log(`Found ${deps.length} tree-sitter dependencies to check.`);
+	log.info(`Found ${deps.length} tree-sitter dependencies to check.`);
 
-	const compileGrammar = async (dep) => {
-		const depPath = path.resolve("node_modules", dep);
+	const successfulLanguages = new Set();
 
-		try {
-			await fs.access(depPath);
-		} catch {
-			console.warn(`[WARN] Directory missing for ${dep}. Did you run install?`);
-			return;
-		}
+	await pMap(deps, (dep) => processDependency(dep, successfulLanguages), {
+		concurrency: 3,
+	});
 
-		const baseCleanName = dep
-			.replace(/^@[^/]+\//, "")
-			.replace(/^tree-sitter-/, "");
-
-		const prebuiltWasms = [];
-		try {
-			const entries = await fs.readdir(depPath, { withFileTypes: true });
-			for (const entry of entries) {
-				if (
-					entry.isFile() &&
-					entry.name.endsWith(".wasm") &&
-					entry.name.startsWith("tree-sitter-")
-				) {
-					prebuiltWasms.push(entry.name);
-				}
-			}
-		} catch (e) {}
-
-		if (prebuiltWasms.length > 0) {
-			console.log(`[INFO] Found prebuilt WASMs for ${dep}. Skipping build.`);
-			for (const wasmFile of prebuiltWasms) {
-				const cleanWasmName = wasmFile
-					.replace(/\.wasm$/, "")
-					.replace(/^tree-sitter-/, "")
-					.replace(/_/g, "-");
-
-				let langName;
-				if (
-					cleanWasmName.startsWith(baseCleanName) ||
-					cleanWasmName === baseCleanName
-				) {
-					langName = cleanWasmName;
-				} else {
-					langName = `${baseCleanName}-${cleanWasmName}`;
-				}
-
-				if (LANG_NAME_MAP[langName]) {
-					langName = LANG_NAME_MAP[langName];
-				}
-
-				const langOutDir = path.join(OUT_DIR, langName);
-
-				try {
-					await fs.mkdir(langOutDir, { recursive: true });
-
-					await fs.copyFile(
-						path.join(depPath, wasmFile),
-						path.join(langOutDir, `tree-sitter-${langName}.wasm`),
-					);
-					await copyScmFiles(depPath, langOutDir, depPath);
-
-					console.log(
-						`[SUCCESS] Copied prebuilt WASM and queries for ${langName}`,
-					);
-				} catch (error) {
-					console.error(
-						`[ERROR] Failed to process prebuilt WASM ${wasmFile}:\n  -> ${error.message}`,
-					);
-				}
-			}
-			return;
-		}
-
-		const grammarDirs = await findGrammarDirs(depPath);
-
-		if (grammarDirs.length === 0) {
-			console.warn(
-				`[WARN] No grammar.js or src/grammar.json found for ${dep}. Skipping.`,
-			);
-			return;
-		}
-
-		for (const grammarDir of grammarDirs) {
-			const relativeName = path.relative(
-				path.resolve("node_modules"),
-				grammarDir,
-			);
-
-			let langName;
-			if (grammarDir === depPath) {
-				langName = baseCleanName;
-			} else {
-				const folderName = path.basename(grammarDir);
-				const cleanFolderName = folderName.replace(/^tree-sitter-/, "");
-
-				if (
-					cleanFolderName.startsWith(baseCleanName) ||
-					cleanFolderName === baseCleanName
-				) {
-					langName = cleanFolderName;
-				} else {
-					langName = `${baseCleanName}-${cleanFolderName}`;
-				}
-			}
-
-			if (LANG_NAME_MAP[langName]) {
-				langName = LANG_NAME_MAP[langName];
-			}
-
-			const langOutDir = path.join(OUT_DIR, langName);
-
-			try {
-				await fs.mkdir(langOutDir, { recursive: true });
-				console.log(
-					`Building WASM for ${relativeName} into out/${langName}...`,
-				);
-
-				await execAsync(`pnpm exec tree-sitter build --wasm "${grammarDir}"`, {
-					cwd: langOutDir,
-				});
-
-				const outFiles = await fs.readdir(langOutDir);
-				const generatedWasm = outFiles.find((f) => f.endsWith(".wasm"));
-				if (generatedWasm && generatedWasm !== `tree-sitter-${langName}.wasm`) {
-					await fs.rename(
-						path.join(langOutDir, generatedWasm),
-						path.join(langOutDir, `tree-sitter-${langName}.wasm`),
-					);
-				}
-
-				await copyScmFiles(grammarDir, langOutDir, depPath);
-
-				console.log(`[SUCCESS] Compiled and copied queries for ${langName}`);
-			} catch (error) {
-				console.error(
-					`[ERROR] Failed to process ${relativeName}:\n  -> ${error.message.split("\n")[0]}`,
-				);
-			}
-		}
-	};
-
-	await pMap(deps, compileGrammar, { concurrency: 5 });
-	console.log("\n[DONE] Build process completed.");
+	await generateDeclarationFile(successfulLanguages);
+	log.info("Build process completed.");
 }
 
-main().catch((err) => console.error("[FATAL ERROR]", err));
+main().catch((err) => {
+	log.error(`Application crash: ${err.message}`);
+	process.exit(1);
+});

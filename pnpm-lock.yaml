@@ -203,6 +203,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  tree-sitter-html: ^0.23.2
+
 importers:
 
   .:
@@ -213,6 +216,9 @@ importers:
       '@6cdh/tree-sitter-scheme':
         specifier: 0.24.7-1
         version: 0.24.7-1
+      '@derekstride/tree-sitter-sql':
+        specifier: ^0.3.11
+        version: 0.3.11
       '@eagleoutice/tree-sitter-r':
         specifier: ^1.1.2
         version: 1.1.2
@@ -240,6 +246,15 @@ importers:
       p-map:
         specifier: ^7.0.4
         version: 7.0.4
+      tree-sitter-angular:
+        specifier: ^0.9.2
+        version: 0.9.2
+      tree-sitter-asm:
+        specifier: git+https://github.com/RubixDev/tree-sitter-asm.git#839741fef4dab5128952334624905c82b40c7133
+        version: https://codeload.github.com/RubixDev/tree-sitter-asm/tar.gz/839741fef4dab5128952334624905c82b40c7133
+      tree-sitter-astro:
+        specifier: git+https://github.com/virchau13/tree-sitter-astro.git#213f6e6973d9b456c6e50e86f19f66877e7ef0ee
+        version: https://codeload.github.com/virchau13/tree-sitter-astro/tar.gz/213f6e6973d9b456c6e50e86f19f66877e7ef0ee
       tree-sitter-bash:
         specifier: ^0.25.1
         version: 0.25.1
@@ -253,13 +268,16 @@ importers:
         specifier: ^0.26.8
         version: 0.26.8
       tree-sitter-clojure:
-        specifier: git+https://github.com/sogaiu/tree-sitter-clojure.git
+        specifier: git+https://github.com/sogaiu/tree-sitter-clojure.git#e43eff80d17cf34852dcd92ca5e6986d23a7040f
         version: https://codeload.github.com/sogaiu/tree-sitter-clojure/tar.gz/e43eff80d17cf34852dcd92ca5e6986d23a7040f
-      tree-sitter-clojurescript:
-        specifier: git+https://github.com/sogaiu/tree-sitter-clojure.git
-        version: tree-sitter-clojure@https://codeload.github.com/sogaiu/tree-sitter-clojure/tar.gz/e43eff80d17cf34852dcd92ca5e6986d23a7040f
+      tree-sitter-cmake:
+        specifier: git+https://github.com/uyha/tree-sitter-cmake.git#c7b2a71e7f8ecb167fad4c97227c838439280175
+        version: https://codeload.github.com/uyha/tree-sitter-cmake/tar.gz/c7b2a71e7f8ecb167fad4c97227c838439280175
+      tree-sitter-comment:
+        specifier: ^0.3.0
+        version: 0.3.0
       tree-sitter-commonlisp:
-        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-commonlisp.git
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-commonlisp.git#32323509b3d9fe96607d151c2da2c9009eb13a2f
         version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-commonlisp/tar.gz/32323509b3d9fe96607d151c2da2c9009eb13a2f
       tree-sitter-cpp:
         specifier: ^0.23.4
@@ -267,9 +285,21 @@ importers:
       tree-sitter-css:
         specifier: ^0.25.0
         version: 0.25.0
+      tree-sitter-csv:
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-csv.git#f6bf6e35eb0b95fbadea4bb39cb9709507fcb181
+        version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-csv/tar.gz/f6bf6e35eb0b95fbadea4bb39cb9709507fcb181
       tree-sitter-dart:
         specifier: ^1.0.0
         version: 1.0.0
+      tree-sitter-diff:
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-diff.git#2520c3f934b3179bb540d23e0ef45f75304b5fed
+        version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-diff/tar.gz/2520c3f934b3179bb540d23e0ef45f75304b5fed
+      tree-sitter-dockerfile:
+        specifier: git+https://github.com/camdencheek/tree-sitter-dockerfile.git#971acdd908568b4531b0ba28a445bf0bb720aba5
+        version: https://codeload.github.com/camdencheek/tree-sitter-dockerfile/tar.gz/971acdd908568b4531b0ba28a445bf0bb720aba5
+      tree-sitter-editorconfig:
+        specifier: git+https://github.com/ValdezFOmar/tree-sitter-editorconfig.git#bfd74395e393f56ba58db953458b346f02d6f7b2
+        version: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2
       tree-sitter-elisp:
         specifier: ^1.6.1
         version: 1.6.1
@@ -280,20 +310,50 @@ importers:
         specifier: ^0.25.0
         version: 0.25.0
       tree-sitter-erlang:
-        specifier: git+https://github.com/WhatsApp/tree-sitter-erlang.git
+        specifier: git+https://github.com/WhatsApp/tree-sitter-erlang.git#e446ec60022a7cafe157805742b41c04b499cc5d
         version: https://codeload.github.com/WhatsApp/tree-sitter-erlang/tar.gz/e446ec60022a7cafe157805742b41c04b499cc5d
+      tree-sitter-fish:
+        specifier: git+https://github.com/ram02z/tree-sitter-fish.git#f435b0bd772578c70e5d158b85267bb886316f88
+        version: https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88
+      tree-sitter-gdscript:
+        specifier: ^6.1.0
+        version: 6.1.0
+      tree-sitter-gdshader:
+        specifier: git+https://github.com/airblast-dev/tree-sitter-gdshader.git#68268631c8b6dc093985f1246b099f81b30ea7d1
+        version: https://codeload.github.com/airblast-dev/tree-sitter-gdshader/tar.gz/68268631c8b6dc093985f1246b099f81b30ea7d1
+      tree-sitter-git-config:
+        specifier: git+https://github.com/the-mikedavis/tree-sitter-git-config.git#0fbc9f99d5a28865f9de8427fb0672d66f9d83a5
+        version: https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5
+      tree-sitter-git-rebase:
+        specifier: git+https://github.com/the-mikedavis/tree-sitter-git-rebase.git#39bf3b7566c86ccffd70aaa5105c7c8b76788975
+        version: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975
+      tree-sitter-gitattributes:
+        specifier: ^0.1.6
+        version: 0.1.6
+      tree-sitter-gitignore:
+        specifier: git+https://github.com/shunsambongi/tree-sitter-gitignore.git#f4685bf11ac466dd278449bcfe5fd014e94aa504
+        version: https://codeload.github.com/shunsambongi/tree-sitter-gitignore/tar.gz/f4685bf11ac466dd278449bcfe5fd014e94aa504
       tree-sitter-go:
         specifier: ^0.25.0
         version: 0.25.0
+      tree-sitter-godot-resource:
+        specifier: ^0.7.0
+        version: 0.7.0
       tree-sitter-graphql:
-        specifier: git+https://github.com/joowani/tree-sitter-graphql.git
+        specifier: git+https://github.com/joowani/tree-sitter-graphql.git#df5b88d1d24dcfc02e64919d2d20491359abe4c8
         version: https://codeload.github.com/joowani/tree-sitter-graphql/tar.gz/df5b88d1d24dcfc02e64919d2d20491359abe4c8
+      tree-sitter-groovy:
+        specifier: git+https://github.com/murtaza64/tree-sitter-groovy.git#deb0dcf8c4544f07564060f6e9b9f6e4b0bfc27d
+        version: '@murtaza64/tree-sitter-groovy@https://codeload.github.com/murtaza64/tree-sitter-groovy/tar.gz/deb0dcf8c4544f07564060f6e9b9f6e4b0bfc27d'
       tree-sitter-haskell:
         specifier: ^0.23.1
         version: 0.23.1
       tree-sitter-html:
         specifier: ^0.23.2
         version: 0.23.2
+      tree-sitter-ini:
+        specifier: git+https://github.com/justinmk/tree-sitter-ini.git#e4018b5176132b4f3c5d6e61cea383f42288d0f5
+        version: https://codeload.github.com/justinmk/tree-sitter-ini/tar.gz/e4018b5176132b4f3c5d6e61cea383f42288d0f5
       tree-sitter-java:
         specifier: ^0.23.5
         version: 0.23.5
@@ -304,13 +364,19 @@ importers:
         specifier: ^0.24.8
         version: 0.24.8
       tree-sitter-julia:
-        specifier: git+https://github.com/tree-sitter/tree-sitter-julia.git
+        specifier: git+https://github.com/tree-sitter/tree-sitter-julia.git#e0f9dcd180fdcfcfa8d79a3531e11d99e79321d3
         version: https://codeload.github.com/tree-sitter/tree-sitter-julia/tar.gz/e0f9dcd180fdcfcfa8d79a3531e11d99e79321d3
       tree-sitter-kotlin:
         specifier: ^0.3.8
         version: 0.3.8
+      tree-sitter-matlab:
+        specifier: git+https://github.com/acristoffers/tree-sitter-matlab.git#c2390a59016f74e7d5f75ef09510768b4f30217e
+        version: '@acristoffers/tree-sitter-matlab@https://codeload.github.com/acristoffers/tree-sitter-matlab/tar.gz/c2390a59016f74e7d5f75ef09510768b4f30217e'
+      tree-sitter-nim:
+        specifier: git+https://github.com/alaviss/tree-sitter-nim.git#3878440d9398515ae053c6f6024986e69868bb74
+        version: https://codeload.github.com/alaviss/tree-sitter-nim/tar.gz/3878440d9398515ae053c6f6024986e69868bb74
       tree-sitter-nix:
-        specifier: git+https://github.com/nix-community/tree-sitter-nix.git
+        specifier: git+https://github.com/nix-community/tree-sitter-nix.git#69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017
         version: https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017
       tree-sitter-objc:
         specifier: ^3.0.2
@@ -325,13 +391,16 @@ importers:
         specifier: ^0.24.2
         version: 0.24.2
       tree-sitter-prisma:
-        specifier: git+https://github.com/victorhqc/tree-sitter-prisma.git
-        version: https://codeload.github.com/victorhqc/tree-sitter-prisma/tar.gz/3556b2c1f20ec9ac91e92d32c43d9d2a0ca3cc49
+        specifier: ^1.6.0
+        version: 1.6.0
       tree-sitter-python:
         specifier: ^0.25.0
         version: 0.25.0
+      tree-sitter-qmljs:
+        specifier: ^0.3.0
+        version: 0.3.0
       tree-sitter-query:
-        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-query.git
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-query.git#fc5409c6820dd5e02b0b0a309d3da2bfcde2db17
         version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-query/tar.gz/fc5409c6820dd5e02b0b0a309d3da2bfcde2db17
       tree-sitter-regex:
         specifier: ^0.25.0
@@ -348,24 +417,24 @@ importers:
       tree-sitter-scss:
         specifier: ^1.0.0
         version: 1.0.0
-      tree-sitter-sql:
-        specifier: ^0.1.0
-        version: 0.1.0
       tree-sitter-swift:
         specifier: ^0.7.1
         version: 0.7.1
       tree-sitter-typescript:
         specifier: ^0.23.2
         version: 0.23.2
+      tree-sitter-vim:
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-vim.git#3092fcd99eb87bbd0fc434aa03650ba58bd5b43b
+        version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-vim/tar.gz/3092fcd99eb87bbd0fc434aa03650ba58bd5b43b
       tree-sitter-vimdoc:
-        specifier: git+https://github.com/neovim/tree-sitter-vimdoc.git
+        specifier: git+https://github.com/neovim/tree-sitter-vimdoc.git#f061895a0eff1d5b90e4fb60d21d87be3267031a
         version: https://codeload.github.com/neovim/tree-sitter-vimdoc/tar.gz/f061895a0eff1d5b90e4fb60d21d87be3267031a
       tree-sitter-vue:
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-vue.git#ce8011a414fdf8091f4e4071752efc376f4afb08
+        version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-vue/tar.gz/ce8011a414fdf8091f4e4071752efc376f4afb08
       tree-sitter-yaml:
-        specifier: git+https://github.com/ikatyang/tree-sitter-yaml.git
-        version: https://codeload.github.com/ikatyang/tree-sitter-yaml/tar.gz/0e36bed171768908f331ff7dff9d956bae016efb
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-yaml.git#a1c4812a73ec5e089de8e441fdea3a921e8d5079
+        version: '@tree-sitter-grammars/tree-sitter-yaml@https://codeload.github.com/tree-sitter-grammars/tree-sitter-yaml/tar.gz/a1c4812a73ec5e089de8e441fdea3a921e8d5079'
 
 packages:
 
@@ -387,6 +456,24 @@ packages:
       tree_sitter:
         optional: true
 
+  '@acristoffers/tree-sitter-matlab@https://codeload.github.com/acristoffers/tree-sitter-matlab/tar.gz/c2390a59016f74e7d5f75ef09510768b4f30217e':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/acristoffers/tree-sitter-matlab/tar.gz/c2390a59016f74e7d5f75ef09510768b4f30217e}
+    version: 1.3.0
+    peerDependencies:
+      tree-sitter: ^0.21.1
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  '@derekstride/tree-sitter-sql@0.3.11':
+    resolution: {integrity: sha512-YRtTXVWK4n7/3BUGchhGcW/IF1u2ldR2fd0t3Uw7ymbGXcRfiG3v1T6N43jQKXz2LwN+Nx+Ab96T0HtusBVH9g==}
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
   '@eagleoutice/tree-sitter-r@1.1.2':
     resolution: {integrity: sha512-HR0RyoI5uxcfsdZvTMqSM8GJyGo6DQTkfdgqygQ6N+D0KQObRH4RxYgBZ6ePsGq/36RBAqv8y0NeQvAFL2N4dQ==}
     peerDependencies:
@@ -402,6 +489,16 @@ packages:
       tree-sitter: ^0.25.0
     peerDependenciesMeta:
       tree-sitter:
+        optional: true
+
+  '@murtaza64/tree-sitter-groovy@https://codeload.github.com/murtaza64/tree-sitter-groovy/tar.gz/deb0dcf8c4544f07564060f6e9b9f6e4b0bfc27d':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/murtaza64/tree-sitter-groovy/tar.gz/deb0dcf8c4544f07564060f6e9b9f6e4b0bfc27d}
+    version: 0.0.1
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
         optional: true
 
   '@tree-sitter-grammars/tree-sitter-hcl@1.2.0':
@@ -446,6 +543,15 @@ packages:
       tree_sitter:
         optional: true
 
+  '@tree-sitter-grammars/tree-sitter-yaml@https://codeload.github.com/tree-sitter-grammars/tree-sitter-yaml/tar.gz/a1c4812a73ec5e089de8e441fdea3a921e8d5079':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-yaml/tar.gz/a1c4812a73ec5e089de8e441fdea3a921e8d5079}
+    version: 0.7.2
+    peerDependencies:
+      tree-sitter: ^0.22.4
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
   '@tree-sitter-grammars/tree-sitter-zig@1.1.2':
     resolution: {integrity: sha512-J0L31HZ2isy3F5zb2g5QWQOv2r/pbruQNL9ADhuQv2pn5BQOzxt80WcEJaYXBeuJ8GHxVT42slpCna8k1c8LOw==}
     peerDependencies:
@@ -479,6 +585,29 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+
+  tree-sitter-angular@0.9.2:
+    resolution: {integrity: sha512-jaC4JFZ2M1t25qlt23DeqLlGbi8mh80It0ZuTXg6OJo8yi24fZiMuNTKkb40av/g6V1RRp6nWrYPE4S6ISbgqg==}
+    peerDependencies:
+      tree-sitter: ^0.21.1
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-asm@https://codeload.github.com/RubixDev/tree-sitter-asm/tar.gz/839741fef4dab5128952334624905c82b40c7133:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/RubixDev/tree-sitter-asm/tar.gz/839741fef4dab5128952334624905c82b40c7133}
+    version: 0.1.0
+    peerDependencies:
+      tree-sitter: ^0.22.6
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-astro@https://codeload.github.com/virchau13/tree-sitter-astro/tar.gz/213f6e6973d9b456c6e50e86f19f66877e7ef0ee:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/virchau13/tree-sitter-astro/tar.gz/213f6e6973d9b456c6e50e86f19f66877e7ef0ee}
+    version: 0.0.1
 
   tree-sitter-bash@0.25.1:
     resolution: {integrity: sha512-7hMytuYIMoXOq24yRulgIxthE9YmggZIOHCyPTTuJcu6EU54tYD+4G39cUb28kxC6jMf/AbPfWGLQtgPTdh3xw==}
@@ -526,6 +655,24 @@ packages:
     resolution: {gitHosted: true, tarball: https://codeload.github.com/sogaiu/tree-sitter-clojure/tar.gz/e43eff80d17cf34852dcd92ca5e6986d23a7040f}
     version: 0.0.13
 
+  tree-sitter-cmake@https://codeload.github.com/uyha/tree-sitter-cmake/tar.gz/c7b2a71e7f8ecb167fad4c97227c838439280175:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/uyha/tree-sitter-cmake/tar.gz/c7b2a71e7f8ecb167fad4c97227c838439280175}
+    version: 0.7.2
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-comment@0.3.0:
+    resolution: {integrity: sha512-9gkrSakq42+5vY23R2+sronY55353ptxGPs8egU8rzPF/qeHtCMrOG0JB1XMvgP3yyvdBUE48dEZavqvlAH+wQ==}
+    peerDependencies:
+      tree-sitter: ^0.21.1
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
   tree-sitter-commonlisp@https://codeload.github.com/tree-sitter-grammars/tree-sitter-commonlisp/tar.gz/32323509b3d9fe96607d151c2da2c9009eb13a2f:
     resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-commonlisp/tar.gz/32323509b3d9fe96607d151c2da2c9009eb13a2f}
     version: 0.4.1
@@ -555,8 +702,41 @@ packages:
       tree-sitter:
         optional: true
 
+  tree-sitter-csv@https://codeload.github.com/tree-sitter-grammars/tree-sitter-csv/tar.gz/f6bf6e35eb0b95fbadea4bb39cb9709507fcb181:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-csv/tar.gz/f6bf6e35eb0b95fbadea4bb39cb9709507fcb181}
+    version: 1.2.0
+
   tree-sitter-dart@1.0.0:
     resolution: {integrity: sha512-Ve5YMPJjjGW9LEsO+MngAOibQsw5obFp+bUT41pvwdcXWRwJImOWs3eaPi6AubEiBmc09qvhdvxeIXvxlhMnug==}
+
+  tree-sitter-diff@https://codeload.github.com/tree-sitter-grammars/tree-sitter-diff/tar.gz/2520c3f934b3179bb540d23e0ef45f75304b5fed:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-diff/tar.gz/2520c3f934b3179bb540d23e0ef45f75304b5fed}
+    version: 0.1.0
+    peerDependencies:
+      tree-sitter: ^0.21.1
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-dockerfile@https://codeload.github.com/camdencheek/tree-sitter-dockerfile/tar.gz/971acdd908568b4531b0ba28a445bf0bb720aba5:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/camdencheek/tree-sitter-dockerfile/tar.gz/971acdd908568b4531b0ba28a445bf0bb720aba5}
+    version: 0.2.0
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2}
+    version: 2.0.0
+    peerDependencies:
+      tree-sitter: ^0.25.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
 
   tree-sitter-elisp@1.6.1:
     resolution: {integrity: sha512-ALJ50YOuqu2Z/qKyQMh3RT5OhQmTRc2K/4MZzPdd1eKyFdKPaYpG0ZmPyovNTXyW14Qn63SgY960el55wLwy8Q==}
@@ -590,10 +770,65 @@ packages:
       tree_sitter:
         optional: true
 
+  tree-sitter-fish@https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88}
+    version: 3.7.0
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
+  tree-sitter-gdscript@6.1.0:
+    resolution: {integrity: sha512-Uy5+GWLkec2JaS1mamiJYsC9j/JoW2FxFq4bnji95gyTtMTsqO6+RSVIaBTU/vRGSNEi3PVDZzyV0j3B4RdntA==}
+    peerDependencies:
+      tree-sitter: ^0.21.1
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  tree-sitter-gdshader@https://codeload.github.com/airblast-dev/tree-sitter-gdshader/tar.gz/68268631c8b6dc093985f1246b099f81b30ea7d1:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/airblast-dev/tree-sitter-gdshader/tar.gz/68268631c8b6dc093985f1246b099f81b30ea7d1}
+    version: 0.4.0
+    peerDependencies:
+      tree-sitter: ^0.22.4
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  tree-sitter-git-config@https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5}
+    version: 0.0.1
+
+  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975}
+    version: 0.1.0
+    peerDependencies:
+      tree-sitter: ^0.25.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  tree-sitter-gitattributes@0.1.6:
+    resolution: {integrity: sha512-xZ+7Kd/3NGQ29TQHpGkXSNCAFwJbCjW8ogBg0JwE3gnNHIX8sAacFBCp3YrEsOoSTt5Yqq8x5wKDfJOiugdhgw==}
+
+  tree-sitter-gitignore@https://codeload.github.com/shunsambongi/tree-sitter-gitignore/tar.gz/f4685bf11ac466dd278449bcfe5fd014e94aa504:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/shunsambongi/tree-sitter-gitignore/tar.gz/f4685bf11ac466dd278449bcfe5fd014e94aa504}
+    version: 0.1.0
+
   tree-sitter-go@0.25.0:
     resolution: {integrity: sha512-APBc/Dq3xz/e35Xpkhb1blu5UgW+2E3RyGWawZSCNcbGwa7jhSQPS8KsUupuzBla8PCo8+lz9W/JDJjmfRa2tw==}
     peerDependencies:
       tree-sitter: ^0.25.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
+  tree-sitter-godot-resource@0.7.0:
+    resolution: {integrity: sha512-WH/Od7ZniWYtY4ArjmeAXHFLz1V+VLyuiARusVWDpQYPNbqZblTd8gqfFttjpJG4mITZf/RCS8fBbnwzyzmPKg==}
+    peerDependencies:
+      tree-sitter: ^0.21.1
     peerDependenciesMeta:
       tree-sitter:
         optional: true
@@ -621,6 +856,16 @@ packages:
       tree-sitter: ^0.21.1
     peerDependenciesMeta:
       tree-sitter:
+        optional: true
+
+  tree-sitter-ini@https://codeload.github.com/justinmk/tree-sitter-ini/tar.gz/e4018b5176132b4f3c5d6e61cea383f42288d0f5:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/justinmk/tree-sitter-ini/tar.gz/e4018b5176132b4f3c5d6e61cea383f42288d0f5}
+    version: 1.4.0
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
         optional: true
 
   tree-sitter-java@0.23.5:
@@ -673,8 +918,18 @@ packages:
       tree_sitter:
         optional: true
 
+  tree-sitter-nim@https://codeload.github.com/alaviss/tree-sitter-nim/tar.gz/3878440d9398515ae053c6f6024986e69868bb74:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/alaviss/tree-sitter-nim/tar.gz/3878440d9398515ae053c6f6024986e69868bb74}
+    version: 0.6.2
+    peerDependencies:
+      tree-sitter: ^0.25.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
+        optional: true
+
   tree-sitter-nix@https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017:
-    resolution: {gitHosted: true, integrity: sha512-VVE1god+tTxmTd4ewW7FVJy6k1vbFCfQL3UMG6ZUe7Y8df7Et4g4xIGG8F3XvAk3RPRqX9ZbOrKzH9yb9F9dpg==, tarball: https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017}
     version: 0.3.0
 
   tree-sitter-objc@3.0.2:
@@ -711,9 +966,8 @@ packages:
       tree-sitter:
         optional: true
 
-  tree-sitter-prisma@https://codeload.github.com/victorhqc/tree-sitter-prisma/tar.gz/3556b2c1f20ec9ac91e92d32c43d9d2a0ca3cc49:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/victorhqc/tree-sitter-prisma/tar.gz/3556b2c1f20ec9ac91e92d32c43d9d2a0ca3cc49}
-    version: 1.6.0
+  tree-sitter-prisma@1.6.0:
+    resolution: {integrity: sha512-w3rnsmW+XVVvLeIykMCU0Tevbg23s6xa8wiSrLw+WUTbIBBS47Ds4W9rX0yzPXXFRaOwFPAFooqdv8BQUQxTBA==}
     peerDependencies:
       tree-sitter: ^0.25.0
     peerDependenciesMeta:
@@ -726,6 +980,15 @@ packages:
       tree-sitter: ^0.25.0
     peerDependenciesMeta:
       tree-sitter:
+        optional: true
+
+  tree-sitter-qmljs@0.3.0:
+    resolution: {integrity: sha512-8muyyhWflxX+nNBfXTjBnvAKCrmo6sODm9s7pONKOk4ljnf+6J3p6RAQB1pGn09rWvRtqVSgB37FslUdvtth+w==}
+    peerDependencies:
+      tree-sitter: ^0.21.0
+      tree_sitter: '*'
+    peerDependenciesMeta:
+      tree_sitter:
         optional: true
 
   tree-sitter-query@https://codeload.github.com/tree-sitter-grammars/tree-sitter-query/tar.gz/fc5409c6820dd5e02b0b0a309d3da2bfcde2db17:
@@ -777,9 +1040,6 @@ packages:
       tree-sitter:
         optional: true
 
-  tree-sitter-sql@0.1.0:
-    resolution: {integrity: sha512-8RDVqEGgtVj8FRJ8WkVEzNkfSflkABHJte4KoC1Dl1DucUL7qQzvnAVKVjVW+nGFD+lOgcdl0PkN/oy0/cIbww==}
-
   tree-sitter-swift@0.7.1:
     resolution: {integrity: sha512-pneKVTuGamaBsqqqfB9BvNQjktzh/0IVPR54jLB5Fq/JTDQwYHd0Wo6pVyZ5jAYpbztzq+rJ/rpL9ruxTmSoKw==}
     peerDependencies:
@@ -797,6 +1057,15 @@ packages:
       tree-sitter:
         optional: true
 
+  tree-sitter-vim@https://codeload.github.com/tree-sitter-grammars/tree-sitter-vim/tar.gz/3092fcd99eb87bbd0fc434aa03650ba58bd5b43b:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-vim/tar.gz/3092fcd99eb87bbd0fc434aa03650ba58bd5b43b}
+    version: 0.8.1
+    peerDependencies:
+      tree-sitter: ^0.25.0
+    peerDependenciesMeta:
+      tree-sitter:
+        optional: true
+
   tree-sitter-vimdoc@https://codeload.github.com/neovim/tree-sitter-vimdoc/tar.gz/f061895a0eff1d5b90e4fb60d21d87be3267031a:
     resolution: {gitHosted: true, tarball: https://codeload.github.com/neovim/tree-sitter-vimdoc/tar.gz/f061895a0eff1d5b90e4fb60d21d87be3267031a}
     version: 4.1.0
@@ -806,12 +1075,9 @@ packages:
       tree-sitter:
         optional: true
 
-  tree-sitter-vue@0.2.1:
-    resolution: {integrity: sha512-Uy6/ih87qJfoID5Z45Mb3qBqMuFfhnN5u6Ujgrmi/D6SyFIoZSZTAV97yxsejXFdcn4Vw3/XO+agk7ztIdhJLw==}
-
-  tree-sitter-yaml@https://codeload.github.com/ikatyang/tree-sitter-yaml/tar.gz/0e36bed171768908f331ff7dff9d956bae016efb:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/ikatyang/tree-sitter-yaml/tar.gz/0e36bed171768908f331ff7dff9d956bae016efb}
-    version: 0.5.0
+  tree-sitter-vue@https://codeload.github.com/tree-sitter-grammars/tree-sitter-vue/tar.gz/ce8011a414fdf8091f4e4071752efc376f4afb08:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-vue/tar.gz/ce8011a414fdf8091f4e4071752efc376f4afb08}
+    version: 0.1.0
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -830,6 +1096,16 @@ snapshots:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
+  '@acristoffers/tree-sitter-matlab@https://codeload.github.com/acristoffers/tree-sitter-matlab/tar.gz/c2390a59016f74e7d5f75ef09510768b4f30217e':
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  '@derekstride/tree-sitter-sql@0.3.11':
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
   '@eagleoutice/tree-sitter-r@1.1.2':
     dependencies:
       node-addon-api: 8.7.0
@@ -838,6 +1114,11 @@ snapshots:
   '@elm-tooling/tree-sitter-elm@5.9.0':
     dependencies:
       node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  '@murtaza64/tree-sitter-groovy@https://codeload.github.com/murtaza64/tree-sitter-groovy/tar.gz/deb0dcf8c4544f07564060f6e9b9f6e4b0bfc27d':
+    dependencies:
+      node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
   '@tree-sitter-grammars/tree-sitter-hcl@1.2.0':
@@ -865,6 +1146,11 @@ snapshots:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
+  '@tree-sitter-grammars/tree-sitter-yaml@https://codeload.github.com/tree-sitter-grammars/tree-sitter-yaml/tar.gz/a1c4812a73ec5e089de8e441fdea3a921e8d5079':
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
   '@tree-sitter-grammars/tree-sitter-zig@1.1.2':
     dependencies:
       node-addon-api: 8.7.0
@@ -883,6 +1169,24 @@ snapshots:
   p-map@7.0.4: {}
 
   prettier@2.8.8: {}
+
+  tree-sitter-angular@0.9.2:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+      tree-sitter-html: 0.23.2
+
+  tree-sitter-asm@https://codeload.github.com/RubixDev/tree-sitter-asm/tar.gz/839741fef4dab5128952334624905c82b40c7133:
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
+  tree-sitter-astro@https://codeload.github.com/virchau13/tree-sitter-astro/tar.gz/213f6e6973d9b456c6e50e86f19f66877e7ef0ee:
+    dependencies:
+      nan: 2.27.0
+      tree-sitter-html: 0.23.2
+    transitivePeerDependencies:
+      - tree-sitter
 
   tree-sitter-bash@0.25.1:
     dependencies:
@@ -910,6 +1214,16 @@ snapshots:
 
   tree-sitter-clojure@https://codeload.github.com/sogaiu/tree-sitter-clojure/tar.gz/e43eff80d17cf34852dcd92ca5e6986d23a7040f: {}
 
+  tree-sitter-cmake@https://codeload.github.com/uyha/tree-sitter-cmake/tar.gz/c7b2a71e7f8ecb167fad4c97227c838439280175:
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
+  tree-sitter-comment@0.3.0:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
   tree-sitter-commonlisp@https://codeload.github.com/tree-sitter-grammars/tree-sitter-commonlisp/tar.gz/32323509b3d9fe96607d151c2da2c9009eb13a2f:
     dependencies:
       node-addon-api: 7.1.1
@@ -930,9 +1244,28 @@ snapshots:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
+  tree-sitter-csv@https://codeload.github.com/tree-sitter-grammars/tree-sitter-csv/tar.gz/f6bf6e35eb0b95fbadea4bb39cb9709507fcb181:
+    dependencies:
+      nan: 2.27.0
+
   tree-sitter-dart@1.0.0:
     dependencies:
       nan: 2.27.0
+
+  tree-sitter-diff@https://codeload.github.com/tree-sitter-grammars/tree-sitter-diff/tar.gz/2520c3f934b3179bb540d23e0ef45f75304b5fed:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-dockerfile@https://codeload.github.com/camdencheek/tree-sitter-dockerfile/tar.gz/971acdd908568b4531b0ba28a445bf0bb720aba5:
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
+  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
 
   tree-sitter-elisp@1.6.1:
     dependencies:
@@ -956,7 +1289,45 @@ snapshots:
       prettier: 2.8.8
       tree-sitter-cli: 0.23.2
 
+  tree-sitter-fish@https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88:
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
+  tree-sitter-gdscript@6.1.0:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-gdshader@https://codeload.github.com/airblast-dev/tree-sitter-gdshader/tar.gz/68268631c8b6dc093985f1246b099f81b30ea7d1:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-git-config@https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5:
+    dependencies:
+      node-addon-api: 7.1.1
+      node-gyp-build: 4.8.4
+
+  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-gitattributes@0.1.6:
+    dependencies:
+      nan: 2.27.0
+
+  tree-sitter-gitignore@https://codeload.github.com/shunsambongi/tree-sitter-gitignore/tar.gz/f4685bf11ac466dd278449bcfe5fd014e94aa504:
+    dependencies:
+      nan: 2.27.0
+
   tree-sitter-go@0.25.0:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-godot-resource@0.7.0:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
@@ -974,6 +1345,11 @@ snapshots:
   tree-sitter-html@0.23.2:
     dependencies:
       node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-ini@https://codeload.github.com/justinmk/tree-sitter-ini/tar.gz/e4018b5176132b4f3c5d6e61cea383f42288d0f5:
+    dependencies:
+      node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
   tree-sitter-java@0.23.5:
@@ -1006,6 +1382,10 @@ snapshots:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
+  tree-sitter-nim@https://codeload.github.com/alaviss/tree-sitter-nim/tar.gz/3878440d9398515ae053c6f6024986e69868bb74:
+    dependencies:
+      node-gyp-build: 4.8.4
+
   tree-sitter-nix@https://codeload.github.com/nix-community/tree-sitter-nix/tar.gz/69fbfb02896cdd27cb7ff3cd61f7f3f6bde4f017:
     dependencies:
       nan: 2.27.0
@@ -1031,12 +1411,17 @@ snapshots:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
-  tree-sitter-prisma@https://codeload.github.com/victorhqc/tree-sitter-prisma/tar.gz/3556b2c1f20ec9ac91e92d32c43d9d2a0ca3cc49:
+  tree-sitter-prisma@1.6.0:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
   tree-sitter-python@0.25.0:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
+  tree-sitter-qmljs@0.3.0:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
@@ -1072,10 +1457,6 @@ snapshots:
       node-gyp-build: 4.8.4
       tree-sitter-css: 0.20.0
 
-  tree-sitter-sql@0.1.0:
-    dependencies:
-      nan: 2.27.0
-
   tree-sitter-swift@0.7.1:
     dependencies:
       node-addon-api: 8.7.0
@@ -1089,18 +1470,24 @@ snapshots:
       node-gyp-build: 4.8.4
       tree-sitter-javascript: 0.23.1
 
+  tree-sitter-vim@https://codeload.github.com/tree-sitter-grammars/tree-sitter-vim/tar.gz/3092fcd99eb87bbd0fc434aa03650ba58bd5b43b:
+    dependencies:
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+
   tree-sitter-vimdoc@https://codeload.github.com/neovim/tree-sitter-vimdoc/tar.gz/f061895a0eff1d5b90e4fb60d21d87be3267031a:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
 
-  tree-sitter-vue@0.2.1:
+  tree-sitter-vue@https://codeload.github.com/tree-sitter-grammars/tree-sitter-vue/tar.gz/ce8011a414fdf8091f4e4071752efc376f4afb08:
     dependencies:
       nan: 2.27.0
-
-  tree-sitter-yaml@https://codeload.github.com/ikatyang/tree-sitter-yaml/tar.gz/0e36bed171768908f331ff7dff9d956bae016efb:
-    dependencies:
-      nan: 2.27.0
+      node-addon-api: 8.7.0
+      node-gyp-build: 4.8.4
+      tree-sitter-html: 0.23.2
+    transitivePeerDependencies:
+      - tree-sitter
 
   which@2.0.2:
     dependencies:
