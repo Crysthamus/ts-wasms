@@ -342,9 +342,6 @@ importers:
       tree-sitter-fish:
         specifier: git+https://github.com/ram02z/tree-sitter-fish.git#f435b0bd772578c70e5d158b85267bb886316f88
         version: https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88
-      tree-sitter-fortran:
-        specifier: git+https://github.com/stadelmanma/tree-sitter-fortran.git#7edacd2b21aa80057d9725384a1304a1c758e0f8
-        version: https://codeload.github.com/stadelmanma/tree-sitter-fortran/tar.gz/7edacd2b21aa80057d9725384a1304a1c758e0f8
       tree-sitter-gdscript:
         specifier: ^6.1.0
         version: 6.1.0
@@ -902,16 +899,6 @@ packages:
     version: 3.7.0
     peerDependencies:
       tree-sitter: ^0.21.0
-      tree_sitter: '*'
-    peerDependenciesMeta:
-      tree_sitter:
-        optional: true
-
-  tree-sitter-fortran@https://codeload.github.com/stadelmanma/tree-sitter-fortran/tar.gz/7edacd2b21aa80057d9725384a1304a1c758e0f8:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/stadelmanma/tree-sitter-fortran/tar.gz/7edacd2b21aa80057d9725384a1304a1c758e0f8}
-    version: 0.5.1
-    peerDependencies:
-      tree-sitter: '==0.26.0'
       tree_sitter: '*'
     peerDependenciesMeta:
       tree_sitter:
@@ -1519,11 +1506,6 @@ snapshots:
       tree-sitter-cli: 0.23.2
 
   tree-sitter-fish@https://codeload.github.com/ram02z/tree-sitter-fish/tar.gz/f435b0bd772578c70e5d158b85267bb886316f88:
-    dependencies:
-      node-addon-api: 7.1.1
-      node-gyp-build: 4.8.4
-
-  tree-sitter-fortran@https://codeload.github.com/stadelmanma/tree-sitter-fortran/tar.gz/7edacd2b21aa80057d9725384a1304a1c758e0f8:
     dependencies:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4

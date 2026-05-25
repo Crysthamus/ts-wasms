@@ -24,6 +24,8 @@ const LANG_NAME_MAP = {
 	"hcl-terraform": "terraform",
 	"xml-dtd": "dtd",
 	"typescript-tsx": "tsx",
+	"csv-psv": "psv",
+	"csv-tsv": "tsv",
 };
 
 const SCM_FILES = [
@@ -51,7 +53,8 @@ function getLanguageName(baseName, targetName) {
 			? targetName
 			: `${baseName}-${targetName}`;
 
-	return LANG_NAME_MAP[rawName] || rawName;
+	const mappedName = LANG_NAME_MAP[rawName] || rawName;
+	return mappedName.replace(/-/g, "_");
 }
 
 /**
@@ -215,8 +218,7 @@ async function processPrebuiltWasm(
 	for (const wasmFile of wasmFiles) {
 		const cleanWasmName = wasmFile
 			.replace(/\.wasm$/, "")
-			.replace(/^tree-sitter-/, "")
-			.replace(/_/g, "-");
+			.replace(/^tree-sitter-/, "");
 
 		const langName = getLanguageName(baseCleanName, cleanWasmName);
 		const langOutDir = path.join(OUT_DIR, langName);
