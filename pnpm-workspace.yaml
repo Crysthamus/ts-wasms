@@ -6,6 +6,7 @@ allowBuilds:
   '@eagleoutice/tree-sitter-r': false
   '@elm-tooling/tree-sitter-elm': false
   '@murtaza64/tree-sitter-groovy': false
+  '@pfoerster/tree-sitter-latex': false
   '@tree-sitter-grammars/tree-sitter-hcl': false
   '@tree-sitter-grammars/tree-sitter-lua': false
   '@tree-sitter-grammars/tree-sitter-markdown': false
@@ -13,6 +14,7 @@ allowBuilds:
   '@tree-sitter-grammars/tree-sitter-xml': false
   '@tree-sitter-grammars/tree-sitter-yaml': false
   '@tree-sitter-grammars/tree-sitter-zig': false
+  tree-sitter: false
   tree-sitter-ada: false
   tree-sitter-angular: false
   tree-sitter-arduino: false
@@ -48,7 +50,6 @@ allowBuilds:
   tree-sitter-gdshader: false
   tree-sitter-git-rebase: false
   tree-sitter-gitattributes: false
-  tree-sitter-gitcommit: false
   tree-sitter-gitignore: false
   tree-sitter-gleam: false
   tree-sitter-glsl: false
@@ -60,28 +61,37 @@ allowBuilds:
   tree-sitter-ini: false
   tree-sitter-java: false
   tree-sitter-javascript: false
+  tree-sitter-jq: false
   tree-sitter-json: false
   tree-sitter-julia: false
+  tree-sitter-just: false
   tree-sitter-kdl: false
   tree-sitter-kotlin: false
   tree-sitter-liquid: false
+  tree-sitter-make: false
+  tree-sitter-nginx: false
   tree-sitter-nim: false
   tree-sitter-nix: false
   tree-sitter-objc: false
   tree-sitter-ocaml: false
   tree-sitter-perl: false
   tree-sitter-php: false
+  tree-sitter-powershell: false
   tree-sitter-prisma: false
+  tree-sitter-proto: false
   tree-sitter-python: false
   tree-sitter-qmljs: false
   tree-sitter-query: false
   tree-sitter-regex: false
+  tree-sitter-requirements: false
   tree-sitter-ruby: false
   tree-sitter-rust: false
   tree-sitter-scala: false
   tree-sitter-scss: false
   tree-sitter-solidity: false
+  tree-sitter-ssh-config: false
   tree-sitter-swift: false
+  tree-sitter-templ: false
   tree-sitter-typescript: false
   tree-sitter-vim: false
   tree-sitter-vimdoc: false
