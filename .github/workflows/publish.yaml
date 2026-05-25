@@ -2,6 +2,12 @@ name: Build and Publish WASMs
 
 on:
   workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: 'Force a complete rebuild of all WASMs, ignoring cache'
+        required: false
+        type: boolean
+        default: false
   release:
     types: [published]
 
@@ -99,13 +105,17 @@ jobs:
         id: cache-out
         uses: actions/cache@v5
         with:
-          path: out
+          path: |
+            out
+            .build-state.json
           key: wasm-build-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ inputs.force_rebuild && github.run_id || 'default' }}
           restore-keys: |
             wasm-build-${{ runner.os }}-
 
       - name: Build WASMs
         run: pnpm run build
+        env:
+          FORCE_REBUILD: ${{ inputs.force_rebuild }}
 
       - name: Publish to NPM
         run: |
@@ -116,4 +126,3 @@ jobs:
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
