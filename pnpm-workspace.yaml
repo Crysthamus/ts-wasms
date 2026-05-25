@@ -13,12 +13,17 @@ allowBuilds:
   '@tree-sitter-grammars/tree-sitter-xml': false
   '@tree-sitter-grammars/tree-sitter-yaml': false
   '@tree-sitter-grammars/tree-sitter-zig': false
+  tree-sitter-ada: false
   tree-sitter-angular: false
+  tree-sitter-arduino: false
   tree-sitter-asm: false
   tree-sitter-astro: false
+  tree-sitter-awk: false
   tree-sitter-bash: false
+  tree-sitter-bibtex: false
   tree-sitter-c: false
   tree-sitter-c-sharp: false
+  tree-sitter-cairo: false
   tree-sitter-cli: true
   tree-sitter-cmake: false
   tree-sitter-comment: false
@@ -26,7 +31,11 @@ allowBuilds:
   tree-sitter-cpp: false
   tree-sitter-css: false
   tree-sitter-csv: false
+  tree-sitter-cuda: false
+  tree-sitter-d: false
   tree-sitter-dart: false
+  tree-sitter-desktop: false
+  tree-sitter-devicetree: false
   tree-sitter-diff: false
   tree-sitter-dockerfile: false
   tree-sitter-editorconfig: false
@@ -35,12 +44,15 @@ allowBuilds:
   tree-sitter-embedded-template: false
   tree-sitter-erlang: false
   tree-sitter-fish: false
+  tree-sitter-fortran: false
   tree-sitter-gdscript: false
   tree-sitter-gdshader: false
   tree-sitter-git-rebase: false
   tree-sitter-gitattributes: false
   tree-sitter-gitcommit: false
   tree-sitter-gitignore: false
+  tree-sitter-gleam: false
+  tree-sitter-glsl: false
   tree-sitter-go: false
   tree-sitter-godot-resource: false
   tree-sitter-graphql: false
@@ -51,7 +63,9 @@ allowBuilds:
   tree-sitter-javascript: false
   tree-sitter-json: false
   tree-sitter-julia: false
+  tree-sitter-kdl: false
   tree-sitter-kotlin: false
+  tree-sitter-liquid: false
   tree-sitter-nim: false
   tree-sitter-nix: false
   tree-sitter-objc: false
@@ -67,12 +81,14 @@ allowBuilds:
   tree-sitter-rust: false
   tree-sitter-scala: false
   tree-sitter-scss: false
+  tree-sitter-solidity: false
   tree-sitter-swift: false
   tree-sitter-typescript: false
   tree-sitter-vim: false
   tree-sitter-vimdoc: false
   tree-sitter-vue: false
   tree-sitter-yaml: false
+  yarn: false
 
 overrides:
   tree-sitter-html: "^0.23.2"
