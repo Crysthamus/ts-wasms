@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.1] - 2026-05-25
+### :bug: Bug Fixes
+- [`780dd93`](https://github.com/Crysthamus/ts-wasms/commit/780dd938d04f7113c535ac6a166f3c22265a3750) - resolve duplicate language naming for certain grammars *(commit by [@Crysthamus](https://github.com/Crysthamus))*
+
+
 ## [v3.0.0] - 2026-05-25
 ### :boom: BREAKING CHANGES
 - due to [`1a1fc6b`](https://github.com/Crysthamus/ts-wasms/commit/1a1fc6b52809dd8bd5bc07619392eee3d82f7838) - normalize language identifiers to use underscores instead of hyphens *(commit by [@Crysthamus](https://github.com/Crysthamus))*:
@@ -25,3 +30,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [v2.0.0]: https://github.com/Crysthamus/ts-wasms/compare/v1.1.0...v2.0.0
 [v3.0.0]: https://github.com/Crysthamus/ts-wasms/compare/v2.0.0...v3.0.0
+[v3.0.1]: https://github.com/Crysthamus/ts-wasms/compare/v3.0.0...v3.0.1
