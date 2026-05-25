@@ -168,41 +168,72 @@ async function fetchMissingQueries(langName, targetDir) {
 }
 
 /**
+ * Generates the manifest.json file detailing actual scm queries present for each language.
+ */
+async function generateManifest(languages) {
+	const manifest = {};
+	const sortedLangs = Array.from(languages).sort();
+
+	for (const lang of sortedLangs) {
+		const langOutDir = path.join(OUT_DIR, lang);
+		try {
+			const entries = await fs.readdir(langOutDir, { withFileTypes: true });
+			const queries = entries
+				.filter((e) => e.isFile() && e.name.endsWith(".scm"))
+				.map((e) => e.name.replace(/\.scm$/, ""))
+				.sort();
+			manifest[lang] = queries;
+		} catch (error) {
+			manifest[lang] = [];
+		}
+	}
+
+	await fs.writeFile(
+		path.resolve("manifest.json"),
+		JSON.stringify(manifest, null, 4),
+		"utf8",
+	);
+	log.info("Generated manifest.json.");
+	return manifest;
+}
+
+/**
  * Generates the index.d.ts file based on successfully processed languages.
  */
-async function generateDeclarationFile(languages) {
-	const sortedLangs = Array.from(languages).sort();
-	const langUnion =
-		sortedLangs.length > 0
-			? sortedLangs.map((l) => `    | "${l}"`).join("\n")
-			: `    | string`;
+async function generateDeclarationFile(manifest) {
+	let content = `/** Standard Tree-sitter query categories mapped per language */
+export type QueryMap = {
+`;
 
-	const content = `/** Standard Tree-sitter query categories */
-export type TreeSitterQuery =
-    | "highlights"
-    | "injections"
-    | "locals"
-    | "tags"
-    | "folds"
-    | "indents";
+	for (const [lang, queries] of Object.entries(manifest)) {
+		const queryUnion =
+			queries.length > 0 ? queries.map((q) => `"${q}"`).join(" | ") : "never";
+		content += `    "${lang}": ${queryUnion};\n`;
+	}
+
+	content += `};
 
 /** Supported language identifiers compiled during build step */
-export type SupportedLanguage =
-${langUnion};
+export type SupportedLanguage = keyof QueryMap;
 
 /** Resolves the absolute path to a specific language's WASM file. */
 export declare function getWasmPath(lang: SupportedLanguage): string;
 
 /** Resolves the absolute path to a specific language's query file. */
-export declare function getQueryPath(
-    lang: SupportedLanguage,
-    query: TreeSitterQuery,
+export declare function getQueryPath<L extends SupportedLanguage>(
+    lang: L,
+    query: QueryMap[L],
 ): string;
+
+/** Returns an object mapping available query types to their absolute file paths. */
+export declare function getAvailableQueries<L extends SupportedLanguage>(
+    lang: L,
+): Record<QueryMap[L], string>;
 `;
 
 	await fs.writeFile(path.resolve("index.d.ts"), content, "utf8");
 	log.info(
-		`Generated index.d.ts with ${sortedLangs.length} type-safe languages.`,
+		`Generated index.d.ts with ${Object.keys(manifest).length} languages.`,
 	);
 }
 
@@ -367,7 +398,8 @@ async function main() {
 	const deps = Object.keys(pkg.devDependencies || {}).filter(
 		(d) =>
 			(d.includes("tree-sitter-") || d.endsWith("-tree-sitter")) &&
-			d !== "tree-sitter-cli",
+			d !== "tree-sitter-cli" &&
+			d != "web-tree-sitter",
 	);
 
 	log.info(`Found ${deps.length} tree-sitter dependencies to check.`);
@@ -378,7 +410,8 @@ async function main() {
 		concurrency: 3,
 	});
 
-	await generateDeclarationFile(successfulLanguages);
+	const manifest = await generateManifest(successfulLanguages);
+	await generateDeclarationFile(manifest);
 	log.info("Build process completed.");
 }
 

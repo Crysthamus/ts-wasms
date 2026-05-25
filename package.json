@@ -1,6 +1,6 @@
 {
 	"name": "ts-wasms",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Pre-built WebAssembly binaries for tree-sitter grammars.",
 	"keywords": [
 		"incremental",
@@ -24,12 +24,14 @@
 			"import": "./index.js",
 			"default": "./index.js"
 		},
+		"./manifest.json": "./manifest.json",
 		"./*": "./out/*"
 	},
 	"files": [
 		"out",
 		"index.js",
-		"index.d.ts"
+		"index.d.ts",
+		"manifest.json"
 	],
 	"scripts": {
 		"build": "node build.js",
