@@ -48,12 +48,16 @@ const log = {
  * Derives the canonical language name based on the base package name and target name.
  */
 function getLanguageName(baseName, targetName) {
+	const normBase = baseName.replace(/_/g, "-");
+	const normTarget = targetName.replace(/_/g, "-");
+
 	const rawName =
-		targetName.startsWith(baseName) || targetName === baseName
-			? targetName
-			: `${baseName}-${targetName}`;
+		normTarget.startsWith(normBase) || normTarget === normBase
+			? normTarget
+			: `${normBase}-${normTarget}`;
 
 	const mappedName = LANG_NAME_MAP[rawName] || rawName;
+
 	return mappedName.replace(/-/g, "_");
 }
 
