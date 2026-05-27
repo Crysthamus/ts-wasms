@@ -1,4 +1,4 @@
-# tree-sitter-wasm [![npm version](https://img.shields.io/npm/v/ts-wasms.svg?style=flat-square)](https://www.npmjs.com/package/ts-wasms)
+# tree-sitter-wasm [![npm version](https://img.shields.io/npm/v/tree-sitter-wasm.svg?style=flat-square)](https://www.npmjs.com/package/tree-sitter-wasm)
 Prebuilt WASM binaries and query files(`.scm`) for tree-sitter's language parsers.
 You can find a list of supported languages [here](https://app.unpkg.com/tree-sitter-wasm/files/out)
 

@@ -352,8 +352,8 @@ importers:
         specifier: git+https://github.com/the-mikedavis/tree-sitter-git-config.git#0fbc9f99d5a28865f9de8427fb0672d66f9d83a5
         version: https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5
       tree-sitter-git-rebase:
-        specifier: git+https://github.com/the-mikedavis/tree-sitter-git-rebase.git#39bf3b7566c86ccffd70aaa5105c7c8b76788975
-        version: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975
+        specifier: git+https://github.com/the-mikedavis/tree-sitter-git-rebase.git#32686d6b72980b36f876ae2d07719c9c3ed154e2
+        version: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/32686d6b72980b36f876ae2d07719c9c3ed154e2
       tree-sitter-gitattributes:
         specifier: ^0.1.6
         version: 0.1.6
@@ -394,7 +394,7 @@ importers:
         specifier: ^0.25.0
         version: 0.25.0
       tree-sitter-jq:
-        specifier: git+https://github.com/flurie/tree-sitter-jq.git
+        specifier: git+https://github.com/flurie/tree-sitter-jq.git#c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9
         version: https://codeload.github.com/flurie/tree-sitter-jq/tar.gz/c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9
       tree-sitter-json:
         specifier: ^0.24.8
@@ -403,7 +403,7 @@ importers:
         specifier: git+https://github.com/tree-sitter/tree-sitter-julia.git#e0f9dcd180fdcfcfa8d79a3531e11d99e79321d3
         version: https://codeload.github.com/tree-sitter/tree-sitter-julia/tar.gz/e0f9dcd180fdcfcfa8d79a3531e11d99e79321d3
       tree-sitter-just:
-        specifier: git+https://github.com/casey/tree-sitter-just.git
+        specifier: git+https://github.com/casey/tree-sitter-just.git#5685543a6e64f66335e25518c9ae8ffa1dae3d01
         version: https://codeload.github.com/casey/tree-sitter-just/tar.gz/5685543a6e64f66335e25518c9ae8ffa1dae3d01
       tree-sitter-kdl:
         specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-kdl.git#b37e3d58e5c5cf8d739b315d6114e02d42e66664
@@ -412,13 +412,13 @@ importers:
         specifier: ^0.3.8
         version: 0.3.8
       tree-sitter-latex:
-        specifier: git+https://github.com/latex-lsp/tree-sitter-latex.git
+        specifier: git+https://github.com/latex-lsp/tree-sitter-latex.git#7e0ecdc02926c7b9b2e0c76003d4fe7b0944f957
         version: '@pfoerster/tree-sitter-latex@https://codeload.github.com/latex-lsp/tree-sitter-latex/tar.gz/7e0ecdc02926c7b9b2e0c76003d4fe7b0944f957'
       tree-sitter-liquid:
         specifier: git+https://github.com/hankthetank27/tree-sitter-liquid.git#e45dbac8c5fa95b1f0e00e7e0c04bc8855823391
         version: https://codeload.github.com/hankthetank27/tree-sitter-liquid/tar.gz/e45dbac8c5fa95b1f0e00e7e0c04bc8855823391
       tree-sitter-make:
-        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-make.git
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-make.git#70613f3d812cbabbd7f38d104d60a409c4008b43
         version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-make/tar.gz/70613f3d812cbabbd7f38d104d60a409c4008b43
       tree-sitter-matlab:
         specifier: git+https://github.com/acristoffers/tree-sitter-matlab.git#c2390a59016f74e7d5f75ef09510768b4f30217e
@@ -451,7 +451,7 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0
       tree-sitter-proto:
-        specifier: git+https://github.com/coder3101/tree-sitter-proto.git
+        specifier: git+https://github.com/coder3101/tree-sitter-proto.git#d65a18ce7c2242801f702770114ad08056c7f8c9
         version: https://codeload.github.com/coder3101/tree-sitter-proto/tar.gz/d65a18ce7c2242801f702770114ad08056c7f8c9
       tree-sitter-python:
         specifier: ^0.25.0
@@ -484,13 +484,13 @@ importers:
         specifier: ^1.2.13
         version: 1.2.13
       tree-sitter-ssh-config:
-        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-ssh-config.git
+        specifier: git+https://github.com/tree-sitter-grammars/tree-sitter-ssh-config.git#71d2693deadaca8cdc09e38ba41d2f6042da1616
         version: https://codeload.github.com/tree-sitter-grammars/tree-sitter-ssh-config/tar.gz/71d2693deadaca8cdc09e38ba41d2f6042da1616
       tree-sitter-swift:
         specifier: ^0.7.1
         version: 0.7.1
       tree-sitter-templ:
-        specifier: git+https://github.com/vrischmann/tree-sitter-templ.git
+        specifier: git+https://github.com/vrischmann/tree-sitter-templ.git#68d6707ed20159ae7525241b8161c126dc1c620c
         version: https://codeload.github.com/vrischmann/tree-sitter-templ/tar.gz/68d6707ed20159ae7525241b8161c126dc1c620c
       tree-sitter-typescript:
         specifier: ^0.23.2
@@ -585,7 +585,7 @@ packages:
     deprecated: This functionality has been moved to @npmcli/fs
 
   '@pfoerster/tree-sitter-latex@https://codeload.github.com/latex-lsp/tree-sitter-latex/tar.gz/7e0ecdc02926c7b9b2e0c76003d4fe7b0944f957':
-    resolution: {gitHosted: true, integrity: sha512-BFT5oOLR8tWPd4nEAU7xTxAfobXqigaW2Vt5rbqrxcXUbFEc03oUJjnmaLndcZsLu3++O0QCOIwuOytkcR3UWg==, tarball: https://codeload.github.com/latex-lsp/tree-sitter-latex/tar.gz/7e0ecdc02926c7b9b2e0c76003d4fe7b0944f957}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/latex-lsp/tree-sitter-latex/tar.gz/7e0ecdc02926c7b9b2e0c76003d4fe7b0944f957}
     version: 0.6.0
     peerDependencies:
       tree-sitter: ^0.21.0 || ^0.25.0
@@ -1289,8 +1289,8 @@ packages:
     resolution: {gitHosted: true, tarball: https://codeload.github.com/the-mikedavis/tree-sitter-git-config/tar.gz/0fbc9f99d5a28865f9de8427fb0672d66f9d83a5}
     version: 0.0.1
 
-  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975}
+  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/32686d6b72980b36f876ae2d07719c9c3ed154e2:
+    resolution: {gitHosted: true, integrity: sha512-0/FLowfNnbEXXAIQSeL7T3CqlbKy2OWjbkZMTkRK+sbdi/p6IOGh30q90BdlWRfhj/vmxbOs5sZ4Qw2RvlpxdA==, tarball: https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/32686d6b72980b36f876ae2d07719c9c3ed154e2}
     version: 0.1.0
     peerDependencies:
       tree-sitter: ^0.25.0
@@ -1396,7 +1396,7 @@ packages:
         optional: true
 
   tree-sitter-jq@https://codeload.github.com/flurie/tree-sitter-jq/tar.gz/c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9:
-    resolution: {gitHosted: true, integrity: sha512-j+Bl6HU1FTlErZUkOKHkgPq77e+znHNzBw10Df8DLXMFxCWHNehe505RUAPso3bUc4dH/tjK/ijoUk1RIDgRRw==, tarball: https://codeload.github.com/flurie/tree-sitter-jq/tar.gz/c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/flurie/tree-sitter-jq/tar.gz/c204e36d2c3c6fce1f57950b12cabcc24e5cc4d9}
     version: 1.0.0
 
   tree-sitter-json@0.24.8:
@@ -1417,7 +1417,7 @@ packages:
         optional: true
 
   tree-sitter-just@https://codeload.github.com/casey/tree-sitter-just/tar.gz/5685543a6e64f66335e25518c9ae8ffa1dae3d01:
-    resolution: {gitHosted: true, integrity: sha512-CGPIKrpEhxzs2mUwJl0AcQKvK91dSVW8ghVvgS3KBNibXSQ3kl2q40PnPY1d4Jl+fyw3pg51kZFzkcxYlJ+3kw==, tarball: https://codeload.github.com/casey/tree-sitter-just/tar.gz/5685543a6e64f66335e25518c9ae8ffa1dae3d01}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/casey/tree-sitter-just/tar.gz/5685543a6e64f66335e25518c9ae8ffa1dae3d01}
     version: 0.2.0
     peerDependencies:
       tree_sitter: '*'
@@ -1449,7 +1449,7 @@ packages:
         optional: true
 
   tree-sitter-make@https://codeload.github.com/tree-sitter-grammars/tree-sitter-make/tar.gz/70613f3d812cbabbd7f38d104d60a409c4008b43:
-    resolution: {gitHosted: true, integrity: sha512-upE68eaBzb8NdRQMr54A2/z6sIMda6vs39oY9NiTNzH3cTq/H3KvUXpwbpAtp5/ulzAl8LGbPaRun+uBjVV4lg==, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-make/tar.gz/70613f3d812cbabbd7f38d104d60a409c4008b43}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-make/tar.gz/70613f3d812cbabbd7f38d104d60a409c4008b43}
     version: 1.1.1
     peerDependencies:
       tree-sitter: ^0.25.0
@@ -1531,7 +1531,7 @@ packages:
         optional: true
 
   tree-sitter-proto@https://codeload.github.com/coder3101/tree-sitter-proto/tar.gz/d65a18ce7c2242801f702770114ad08056c7f8c9:
-    resolution: {gitHosted: true, integrity: sha512-eWHH1ZOTp9P3vzm6LJB6SYUhPwgzcJrCT6TV7Xo8Lj5Asxoa7kalPQJ6Kc4e/KLrkwhlzY7x2VH7RTysiCdxyQ==, tarball: https://codeload.github.com/coder3101/tree-sitter-proto/tar.gz/d65a18ce7c2242801f702770114ad08056c7f8c9}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/coder3101/tree-sitter-proto/tar.gz/d65a18ce7c2242801f702770114ad08056c7f8c9}
     version: 0.4.0
     peerDependencies:
       tree-sitter: ^0.21.1
@@ -1623,7 +1623,7 @@ packages:
         optional: true
 
   tree-sitter-ssh-config@https://codeload.github.com/tree-sitter-grammars/tree-sitter-ssh-config/tar.gz/71d2693deadaca8cdc09e38ba41d2f6042da1616:
-    resolution: {gitHosted: true, integrity: sha512-aBpDVkBiqi3Muu50e42wO1wj7SuXrMFxK9S5TcmvnnijF+fc4YSGgKX10wjjqUs+ddDB+I3/KFpIYudZ5Stonw==, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-ssh-config/tar.gz/71d2693deadaca8cdc09e38ba41d2f6042da1616}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/tree-sitter-grammars/tree-sitter-ssh-config/tar.gz/71d2693deadaca8cdc09e38ba41d2f6042da1616}
     version: 0.4.0
     peerDependencies:
       tree-sitter: ^0.22.4
@@ -1641,7 +1641,7 @@ packages:
         optional: true
 
   tree-sitter-templ@https://codeload.github.com/vrischmann/tree-sitter-templ/tar.gz/68d6707ed20159ae7525241b8161c126dc1c620c:
-    resolution: {gitHosted: true, integrity: sha512-t4WNpElTxPZ/Jw44Ye82t2jXhbqxjQrlxCSEigVnfe8ZzSNYLXgETcb3vlFQ18z+VHTgRTOm4xlzm6W+LBLcfw==, tarball: https://codeload.github.com/vrischmann/tree-sitter-templ/tar.gz/68d6707ed20159ae7525241b8161c126dc1c620c}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/vrischmann/tree-sitter-templ/tar.gz/68d6707ed20159ae7525241b8161c126dc1c620c}
     version: 2.2.0
     peerDependencies:
       tree-sitter: ^0.25.0
@@ -2344,7 +2344,7 @@ snapshots:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
-  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/39bf3b7566c86ccffd70aaa5105c7c8b76788975:
+  tree-sitter-git-rebase@https://codeload.github.com/the-mikedavis/tree-sitter-git-rebase/tar.gz/32686d6b72980b36f876ae2d07719c9c3ed154e2:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4
