@@ -307,8 +307,8 @@ importers:
         specifier: ^0.21.1
         version: 0.21.1
       tree-sitter-d:
-        specifier: git+https://github.com/gdamore/tree-sitter-d.git#fb028c8f14f4188286c2eef143f105def6fbf24f
-        version: https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/fb028c8f14f4188286c2eef143f105def6fbf24f
+        specifier: git+https://github.com/gdamore/tree-sitter-d.git#8bcb13dbddf16ca44a42f8e98e8cf3d86b2b2e48
+        version: https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/8bcb13dbddf16ca44a42f8e98e8cf3d86b2b2e48
       tree-sitter-dart:
         specifier: ^1.0.0
         version: 1.0.0
@@ -325,8 +325,8 @@ importers:
         specifier: git+https://github.com/camdencheek/tree-sitter-dockerfile.git#971acdd908568b4531b0ba28a445bf0bb720aba5
         version: https://codeload.github.com/camdencheek/tree-sitter-dockerfile/tar.gz/971acdd908568b4531b0ba28a445bf0bb720aba5
       tree-sitter-editorconfig:
-        specifier: git+https://github.com/ValdezFOmar/tree-sitter-editorconfig.git#bfd74395e393f56ba58db953458b346f02d6f7b2
-        version: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2
+        specifier: git+https://github.com/ValdezFOmar/tree-sitter-editorconfig.git#9d843ad4cf118e007792de26d7f173c670a4fbd6
+        version: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/9d843ad4cf118e007792de26d7f173c670a4fbd6
       tree-sitter-elisp:
         specifier: ^1.6.1
         version: 1.6.1
@@ -1166,8 +1166,8 @@ packages:
       tree-sitter:
         optional: true
 
-  tree-sitter-d@https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/fb028c8f14f4188286c2eef143f105def6fbf24f:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/fb028c8f14f4188286c2eef143f105def6fbf24f}
+  tree-sitter-d@https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/8bcb13dbddf16ca44a42f8e98e8cf3d86b2b2e48:
+    resolution: {gitHosted: true, integrity: sha512-i1ffBibJq+8oQsvBFTWnPVJlbuXLR8At9t+MVAAiEQRIixs9y7Uu0lqYmpQXcTzr1fFwa2OCXEKJ6CyvWSLjFQ==, tarball: https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/8bcb13dbddf16ca44a42f8e98e8cf3d86b2b2e48}
     version: 0.8.2
     peerDependencies:
       tree-sitter: ^0.21.0
@@ -1217,8 +1217,8 @@ packages:
       tree_sitter:
         optional: true
 
-  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2}
+  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/9d843ad4cf118e007792de26d7f173c670a4fbd6:
+    resolution: {gitHosted: true, integrity: sha512-SxW+GSTUE3pKzNrqiRt7o94lLKw5MgPHfofIOv1CAn+Hn7AYs0oKU2PtBZtnhItrwehRf69Qb5alEmcL9Ed/9A==, tarball: https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/9d843ad4cf118e007792de26d7f173c670a4fbd6}
     version: 2.0.0
     peerDependencies:
       tree-sitter: ^0.25.0
@@ -2268,7 +2268,7 @@ snapshots:
       tree-sitter-c: 0.24.1
       tree-sitter-cpp: 0.23.4
 
-  tree-sitter-d@https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/fb028c8f14f4188286c2eef143f105def6fbf24f:
+  tree-sitter-d@https://codeload.github.com/gdamore/tree-sitter-d/tar.gz/8bcb13dbddf16ca44a42f8e98e8cf3d86b2b2e48:
     dependencies:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
@@ -2297,7 +2297,7 @@ snapshots:
       node-addon-api: 7.1.1
       node-gyp-build: 4.8.4
 
-  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/bfd74395e393f56ba58db953458b346f02d6f7b2:
+  tree-sitter-editorconfig@https://codeload.github.com/ValdezFOmar/tree-sitter-editorconfig/tar.gz/9d843ad4cf118e007792de26d7f173c670a4fbd6:
     dependencies:
       node-addon-api: 8.7.0
       node-gyp-build: 4.8.4

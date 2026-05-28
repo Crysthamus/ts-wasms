@@ -56,27 +56,10 @@ function getLanguageName(baseName, targetName) {
 }
 
 /**
- * Reads the installed package version from the dependency's package.json.
+ * Validates if a dependency's generated assets exist and match the cached root version.
  */
-async function getPackageVersion(depPath) {
-	try {
-		const pkgRaw = await fs.readFile(
-			path.join(depPath, "package.json"),
-			"utf8",
-		);
-		return JSON.parse(pkgRaw).version || "unknown";
-	} catch (err) {
-		if (err.code !== "ENOENT")
-			console.error(`Error reading version for ${depPath}:`, err);
-		return "unknown";
-	}
-}
-
-/**
- * Validates if a dependency's generated assets exist and match the cached version.
- */
-async function validateCache(dep, depVersion, cache) {
-	if (FORCE_REBUILD || !cache[dep] || cache[dep].version !== depVersion) {
+async function validateCache(dep, requestedVersion, cache) {
+	if (FORCE_REBUILD || !cache[dep] || cache[dep].version !== requestedVersion) {
 		return false;
 	}
 
@@ -156,7 +139,7 @@ async function findPrebuiltWasms(depPath) {
 }
 
 /**
- * Copies .scm query files using COPYFILE_EXCL to prevent overwriting existing files without manual checks.
+ * Copies .scm query files.
  */
 async function copyScmFiles(grammarDir, targetDir, depPath) {
 	const dirsToCheck = [path.join(grammarDir, "queries"), grammarDir];
@@ -199,7 +182,7 @@ async function fetchMissingQueries(langName, targetDir) {
 
 			try {
 				await fs.access(destPath);
-				return; // File already exists
+				return;
 			} catch (err) {
 				if (err.code !== "ENOENT") throw err;
 			}
@@ -366,7 +349,7 @@ async function processSourceGrammar(grammarDirs, depPath, baseCleanName) {
 /**
  * Routes a dependency to either prebuilt copying or source compilation with caching.
  */
-async function processDependency(dep, cache) {
+async function processDependency(dep, requestedVersion, cache) {
 	const depPath = path.resolve("node_modules", dep);
 
 	try {
@@ -376,8 +359,7 @@ async function processDependency(dep, cache) {
 		return [];
 	}
 
-	const depVersion = await getPackageVersion(depPath);
-	const isCached = await validateCache(dep, depVersion, cache);
+	const isCached = await validateCache(dep, requestedVersion, cache);
 
 	if (isCached) {
 		return cache[dep].languages || [];
@@ -412,7 +394,7 @@ async function processDependency(dep, cache) {
 	}
 
 	if (builtLanguages.length > 0) {
-		cache[dep] = { version: depVersion, languages: builtLanguages };
+		cache[dep] = { version: requestedVersion, languages: builtLanguages };
 	}
 
 	return builtLanguages;
@@ -445,7 +427,10 @@ async function main() {
 		} catch {}
 	}
 
-	const deps = Object.keys(pkg.devDependencies || {}).filter(
+	const allDeps = {
+		...(pkg.devDependencies || {}),
+	};
+	const deps = Object.keys(allDeps).filter(
 		(d) =>
 			(d.includes("tree-sitter-") || d.endsWith("-tree-sitter")) &&
 			d !== "tree-sitter-cli" &&
@@ -456,7 +441,7 @@ async function main() {
 
 	const nestedLanguages = await pMap(
 		deps,
-		(dep) => processDependency(dep, cache),
+		(dep) => processDependency(dep, allDeps[dep], cache),
 		{ concurrency: 3 },
 	);
 
