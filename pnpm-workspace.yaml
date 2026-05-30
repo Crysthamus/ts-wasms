@@ -46,10 +46,12 @@ allowBuilds:
   tree-sitter-embedded-template: false
   tree-sitter-erlang: false
   tree-sitter-fish: false
+  tree-sitter-fortran: false
   tree-sitter-gdscript: false
   tree-sitter-gdshader: false
   tree-sitter-git-rebase: false
   tree-sitter-gitattributes: false
+  tree-sitter-gitcommit: false
   tree-sitter-gitignore: false
   tree-sitter-gleam: false
   tree-sitter-glsl: false

@@ -8,6 +8,10 @@ const execAsync = promisify(exec);
 const OUT_DIR = path.resolve("out");
 const CACHE_FILE = path.resolve(".build-state.json");
 const FORCE_REBUILD = process.env.FORCE_REBUILD === "true";
+const MANIFEST_ONLY = process.env.MANIFEST_ONLY === "true";
+const SHARD_INDEX = parseInt(process.env.SHARD_INDEX || "0", 10);
+const SHARD_TOTAL = parseInt(process.env.SHARD_TOTAL || "1", 10);
+const TS_BIN = path.resolve("node_modules", ".bin", "tree-sitter");
 
 const IGNORED_DIRS = new Set([
 	"node_modules",
@@ -291,9 +295,9 @@ async function processPrebuiltWasm(wasmFiles, depPath, baseCleanName) {
 			);
 
 			await copyScmFiles(depPath, langOutDir, depPath);
-			await fetchMissingQueries(langName, langOutDir);
+			const fetchPromise = fetchMissingQueries(langName, langOutDir);
 
-			built.push(langName);
+			built.push({ langName, fetchPromise });
 			console.log(`Copied prebuilt WASM and queries for ${langName}`);
 		} catch (error) {
 			console.error(`Failed to process prebuilt WASM ${wasmFile}:`, error);
@@ -312,7 +316,7 @@ async function ensureParserGenerated(grammarDir) {
 	} catch {
 		console.log(`parser.c not found in ${grammarDir}. Generating parser...`);
 		try {
-			await execAsync(`pnpm exec tree-sitter generate`, { cwd: grammarDir });
+			await execAsync(`"${TS_BIN}" generate`, { cwd: grammarDir });
 		} catch (error) {
 			throw new Error(
 				`tree-sitter generate failed: ${error.stderr || error.message}`,
@@ -338,10 +342,9 @@ async function processSourceGrammar(grammarDirs, depPath, baseCleanName) {
 		try {
 			await fs.mkdir(langOutDir, { recursive: true });
 
-			// Ensure parser.c exists before building the wasm
 			await ensureParserGenerated(grammarDir);
 
-			await execAsync(`pnpm exec tree-sitter build --wasm "${grammarDir}"`, {
+			await execAsync(`"${TS_BIN}" build --wasm "${grammarDir}"`, {
 				cwd: langOutDir,
 			});
 
@@ -356,9 +359,9 @@ async function processSourceGrammar(grammarDirs, depPath, baseCleanName) {
 			}
 
 			await copyScmFiles(grammarDir, langOutDir, depPath);
-			await fetchMissingQueries(langName, langOutDir);
+			const fetchPromise = fetchMissingQueries(langName, langOutDir);
 
-			built.push(langName);
+			built.push({ langName, fetchPromise });
 			console.log(`Compiled and copied queries for ${langName}`);
 		} catch (error) {
 			console.error(
@@ -385,7 +388,10 @@ async function processDependency(dep, requestedVersion, cache) {
 	const isCached = await validateCache(dep, requestedVersion, cache);
 
 	if (isCached) {
-		return cache[dep].languages || [];
+		return cache[dep].languages.map((langName) => ({
+			langName,
+			fetchPromise: Promise.resolve(),
+		}));
 	}
 
 	const baseCleanName = dep
@@ -393,10 +399,10 @@ async function processDependency(dep, requestedVersion, cache) {
 		.replace(/^tree-sitter-/, "");
 	const prebuiltWasms = await findPrebuiltWasms(depPath);
 
-	let builtLanguages = [];
+	let builtResults = [];
 
 	if (prebuiltWasms.length > 0) {
-		builtLanguages = await processPrebuiltWasm(
+		builtResults = await processPrebuiltWasm(
 			prebuiltWasms,
 			depPath,
 			baseCleanName,
@@ -409,26 +415,41 @@ async function processDependency(dep, requestedVersion, cache) {
 			);
 			return [];
 		}
-		builtLanguages = await processSourceGrammar(
+		builtResults = await processSourceGrammar(
 			grammarDirs,
 			depPath,
 			baseCleanName,
 		);
 	}
 
-	if (builtLanguages.length > 0) {
-		cache[dep] = { version: requestedVersion, languages: builtLanguages };
+	if (builtResults.length > 0) {
+		const languages = builtResults.map((r) => r.langName);
+		cache[dep] = { version: requestedVersion, languages };
 	}
 
-	return builtLanguages;
+	return builtResults;
 }
 
 /**
  * Main application entry point.
  */
 async function main() {
+	if (MANIFEST_ONLY) {
+		const entries = await fs
+			.readdir(OUT_DIR, { withFileTypes: true })
+			.catch(() => []);
+		const successfulLanguages = new Set();
+		for (const entry of entries) {
+			if (entry.isDirectory()) {
+				successfulLanguages.add(entry.name);
+			}
+		}
+		const manifest = await generateManifest(successfulLanguages);
+		await generateDeclarationFile(manifest);
+		return;
+	}
+
 	if (FORCE_REBUILD) {
-		console.log("FORCE_REBUILD enabled. Purging previous output...");
 		await fs.rm(OUT_DIR, { recursive: true, force: true }).catch(() => {});
 		await fs.rm(CACHE_FILE, { force: true }).catch(() => {});
 	}
@@ -453,29 +474,44 @@ async function main() {
 	const allDeps = {
 		...(pkg.devDependencies || {}),
 	};
-	const deps = Object.keys(allDeps).filter(
+
+	let deps = Object.keys(allDeps).filter(
 		(d) =>
 			(d.includes("tree-sitter-") || d.endsWith("-tree-sitter")) &&
 			d !== "tree-sitter-cli" &&
 			d !== "web-tree-sitter",
 	);
 
-	console.log(`Found ${deps.length} tree-sitter dependencies to check.`);
+	deps.sort();
 
-	const nestedLanguages = await pMap(
+	const isolatedDeps = [
+		"tree-sitter-fortran",
+		"tree-sitter-gitcommit",
+		"tree-sitter-vim",
+	];
+	const normalDeps = deps.filter((d) => !isolatedDeps.includes(d));
+	const combinedDeps = [
+		...isolatedDeps.filter((d) => deps.includes(d)),
+		...normalDeps,
+	];
+
+	deps = combinedDeps.filter((_, i) => i % SHARD_TOTAL === SHARD_INDEX);
+
+	const nestedResults = await pMap(
 		deps,
 		(dep) => processDependency(dep, allDeps[dep], cache),
 		{ concurrency: 3 },
 	);
 
-	const successfulLanguages = new Set(nestedLanguages.flat());
+	const flattenedResults = nestedResults.flat();
+	const successfulLanguages = new Set(flattenedResults.map((r) => r.langName));
 
 	await fs.writeFile(CACHE_FILE, JSON.stringify(cache, null, 4), "utf8");
 
+	await Promise.all(flattenedResults.map((r) => r.fetchPromise));
+
 	const manifest = await generateManifest(successfulLanguages);
 	await generateDeclarationFile(manifest);
-
-	console.log("Build process completed.");
 }
 
 main().catch((err) => {

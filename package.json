@@ -1,6 +1,6 @@
 {
 	"name": "tree-sitter-wasm",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Pre-built WebAssembly binaries and queries for tree-sitter grammars.",
 	"keywords": [
 		"incremental",
@@ -93,6 +93,7 @@
 		"tree-sitter-embedded-template": "^0.25.0",
 		"tree-sitter-erlang": "git+https://github.com/WhatsApp/tree-sitter-erlang.git#e446ec60022a7cafe157805742b41c04b499cc5d",
 		"tree-sitter-fish": "git+https://github.com/ram02z/tree-sitter-fish.git#f435b0bd772578c70e5d158b85267bb886316f88",
+		"tree-sitter-fortran": "git+https://github.com/stadelmanma/tree-sitter-fortran.git#7edacd2b21aa80057d9725384a1304a1c758e0f8",
 		"tree-sitter-gdscript": "^6.1.0",
 		"tree-sitter-gdshader": "git+https://github.com/airblast-dev/tree-sitter-gdshader.git#68268631c8b6dc093985f1246b099f81b30ea7d1",
 		"tree-sitter-git-config": "git+https://github.com/the-mikedavis/tree-sitter-git-config.git#0fbc9f99d5a28865f9de8427fb0672d66f9d83a5",
