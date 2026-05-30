@@ -90,8 +90,11 @@ allowBuilds:
   tree-sitter-scss: false
   tree-sitter-solidity: false
   tree-sitter-ssh-config: false
+  tree-sitter-svelte: false
   tree-sitter-swift: false
+  tree-sitter-systemverilog: false
   tree-sitter-templ: false
+  tree-sitter-test: false
   tree-sitter-typescript: false
   tree-sitter-vim: false
   tree-sitter-vimdoc: false
